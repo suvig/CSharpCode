@@ -1,0 +1,74 @@
+<MasterXml>
+    <CLM_Agreement_ID>OCLM</CLM_Agreement_ID>
+    <CORE_NetworkNames>
+        <NetworkName></NetworkName>
+    </CORE_NetworkNames>
+    <Params>
+        <Params>
+            <CreatedBy>firstname_lastname@bcbst.com</CreatedBy>
+            <CreatedDate>YYYY-MM-DD</CreatedDate>
+            <WKFID>OCLM</WKFID>
+            <ContractEntityName>Contract Entity Name</ContractEntityName>
+            <PracticingAs>DBA Name Here</PracticingAs>
+            <AuthorizedSignatoryName></AuthorizedSignatoryName>
+            <AuthorizedSignatoryEmail></AuthorizedSignatoryEmail>
+            <AuthorizedSignatoryTitle></AuthorizedSignatoryTitle>
+            <ProviderType>Professional Provider</ProviderType>
+            <ActionType>Contract/Amendment - Signed/Amendment - Deemed</ActionType>
+            <ContractTemplate>LOB Name 1|LOB Name 2</ContractTemplate>
+            <DocumentControlNumber>OCLM-0000000</DocumentControlNumber>
+            <EffectiveDate></EffectiveDate>
+            <ApprovalRegion></ApprovalRegion>
+            <ContractingNetworks>
+                <Networks>
+                    <LOB>LOB Name 1</LOB>
+                    <Network></Network>
+                    <Program></Program>
+                    <EffectiveStartDate></EffectiveStartDate>
+                    <EffectiveStartDate_unformatted></EffectiveStartDate_unformatted>
+                    <EffectiveEndDate></EffectiveEndDate>
+                    <EffectiveEndDate_unformatted></EffectiveEndDate_unformatted>
+                    <ContractSpeciality></ContractSpeciality>
+                    <NetworkActionType></NetworkActionType>
+                    <ID>Agreement ID1</ID>
+                </Networks>
+                <Networks>
+                    <LOB>LOB Name 2</LOB>
+                    <Network></Network>
+                    <Program></Program>
+                    <EffectiveStartDate></EffectiveStartDate>
+                    <EffectiveStartDate_unformatted></EffectiveStartDate_unformatted>
+                    <EffectiveEndDate></EffectiveEndDate>
+                    <EffectiveEndDate_unformatted></EffectiveEndDate_unformatted>
+                    <ContractSpeciality></ContractSpeciality>
+                    <NetworkActionType></NetworkActionType>
+                    <ID>Agreement ID2</ID>
+                </Networks>
+            </ContractingNetworks>
+            <RelatedProviders>
+                <Name>Related Provider Name 1</Name>
+                <ProviderID></ProviderID>
+                <TaxID></TaxID>
+                <NPI></NPI>
+                <MedicaidID></MedicaidID>
+                <MedicareNumber></MedicareNumber>
+            </RelatedProviders>
+            <RelatedProviders>
+                <Name>Related Provider Name 2</Name>
+                <ProviderID></ProviderID>
+                <TaxID></TaxID>
+                <NPI></NPI>
+                <MedicaidID></MedicaidID>
+                <MedicareNumber></MedicareNumber>
+            </RelatedProviders>
+        </Params>
+    </Params>
+    <MasterClauseData>
+        <Billing_Requirements></Billing_Requirements>
+        <Confidentiality></Confidentiality>
+    </MasterClauseData>
+    <LogXml>
+        <LogEntry />
+    </LogXml>
+    <Alternate_Language_Requests />
+</MasterXml>

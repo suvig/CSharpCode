@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Rows>
+  <!-- 
+    This configuration maps flat input XML elements to hierarchical output XML structure.
+    
+    FieldType options:
+    - Simple: Single value field (e.g., WKFID, ContractEntityName)
+    - Repeating: Part of a repeating group (e.g., Networks, RelatedProviders)
+    - Calculated: Derived from input (e.g., CLM_Agreement_ID from WKFID)
+    - Static: Always created empty (e.g., LogXml/LogEntry)
+    
+    For Repeating fields:
+    - All fields with the same RepeatingGroupName are grouped together
+    - Pipe-separated values create multiple instances
+    - Values at the same index are combined
+  -->
+  
+  <!-- Root-level fields -->
+  <Row>
+    <InputNode>WKFID</InputNode>
+    <OutputPath>CLM_Agreement_ID</OutputPath>
+    <FieldType>Simple</FieldType>
+  </Row>
+  
+  <!-- CORE_NetworkNames - Extract first Network value -->
+  <Row>
+    <InputNode>Network</InputNode>
+    <OutputPath>CORE_NetworkNames/NetworkName</OutputPath>
+    <FieldType>Calculated</FieldType>
+    <TransformRule>FirstPipeValue</TransformRule>
+  </Row>
+  
+  <!-- Params/Params simple fields -->
+  <Row>
+    <InputNode>Created_By</InputNode>
+    <OutputPath>Params/Params/CreatedBy</OutputPath>
+    <FieldType>Simple</FieldType>
+  </Row>
+  
+  <Row>
+    <InputNode>Created_Date</InputNode>
+    <OutputPath>Params/Params/CreatedDate</OutputPath>
+    <FieldType>Simple</FieldType>
+  </Row>
+  
+  <Row>
+    <InputNode>WKFID</InputNode>
+    <OutputPath>Params/Params/WKFID</OutputPath>
+    <FieldType>Simple</FieldType>
+  </Row>
+  
+  <Row>
+    <InputNode>ContractEntityName</InputNode>
+    <OutputPath>Params/Params/ContractEntityName</OutputPath>
+    <FieldType>Simple</FieldType>
+  </Row>
+  
+  <Row>
+    <InputNode>HospitalBased</InputNode>
+    <OutputPath>Params/Params/HospitalBased</OutputPath>
+    <FieldType>Simple</FieldType>
+  </Row>
+  
+  <Row>
+    <InputNode>SchoolBased</InputNode>
+    <OutputPath>Params/Params/SchoolBased</OutputPath>
+    <FieldType>Simple</FieldType>
+  </Row>
+  
+  <Row>
+    <InputNode>PracticingAs</InputNode>
+    <OutputPath>Params/Params/PracticingAs</OutputPath>
+    <FieldType>Simple</FieldType>
+  </Row>
+  
+  <Row>
+    <InputNode>HoldContract</InputNode>
+    <OutputPath>Params/Params/HoldContract</OutputPath>
+    <FieldType>Simple</FieldType>
+  </Row>
+  
+  <Row>
+    <InputNode>AuthorizedSignatoryName</InputNode>
+    <OutputPath>Params/Params/AuthorizedSignatoryName</OutputPath>
+    <FieldType>Simple</FieldType>
+  </Row>
+  
+  <Row>
+    <InputNode>AuthorizedSignatoryEmail</InputNode>
+    <OutputPath>Params/Params/AuthorizedSignatoryEmail</OutputPath>
+    <FieldType>Simple</FieldType>
+  </Row>
+  
+  <Row>
+    <InputNode>AuthorizedSignatoryTitle</InputNode>
+    <OutputPath>Params/Params/AuthorizedSignatoryTitle</OutputPath>
+    <FieldType>Simple</FieldType>
+  </Row>
+  
+  <Row>
+    <InputNode>ProviderType</InputNode>
+    <OutputPath>Params/Params/ProviderType</OutputPath>
+    <FieldType>Simple</FieldType>
+  </Row>
+  
+  <Row>
+    <InputNode>BusinessUnit</InputNode>
+    <OutputPath>Params/Params/BusinessUnit</OutputPath>
+    <FieldType>Simple</FieldType>
+  </Row>
+  
+  <Row>
+    <InputNode>ActionType</InputNode>
+    <OutputPath>Params/Params/ActionType</OutputPath>
+    <FieldType>Simple</FieldType>
+  </Row>
+  
+  <Row>
+    <InputNode>ContractTemplate</InputNode>
+    <OutputPath>Params/Params/ContractTemplate</OutputPath>
+    <FieldType>Simple</FieldType>
+  </Row>
+  
+  <Row>
+    <InputNode>DocumentControlNumber</InputNode>
+    <OutputPath>Params/Params/DocumentControlNumber</OutputPath>
+    <FieldType>Simple</FieldType>
+  </Row>
+  
+  <Row>
+    <InputNode>EffectiveDate</InputNode>
+    <OutputPath>Params/Params/EffectiveDate</OutputPath>
+    <FieldType>Simple</FieldType>
+  </Row>
+  
+  <Row>
+    <InputNode>ApprovalRegion</InputNode>
+    <OutputPath>Params/Params/ApprovalRegion</OutputPath>
+    <FieldType>Simple</FieldType>
+  </Row>
+  
+  <Row>
+    <InputNode>Tier</InputNode>
+    <OutputPath>Params/Params/Tier</OutputPath>
+    <FieldType>Simple</FieldType>
+  </Row>
+  
+  <!-- ContractingNetworks/Networks - Repeating Group -->
+  <Row>
+    <InputNode>ContractTemplate</InputNode>
+    <OutputPath>Params/Params/ContractingNetworks/Networks/LOB</OutputPath>
+    <FieldType>Repeating</FieldType>
+    <RepeatingGroupName>Networks</RepeatingGroupName>
+    <RepeatingGroupPath>Params/Params/ContractingNetworks</RepeatingGroupPath>
+    <RepeatingElementName>Networks</RepeatingElementName>
+  </Row>
+  
+  <Row>
+    <InputNode>Network</InputNode>
+    <OutputPath>Params/Params/ContractingNetworks/Networks/Network</OutputPath>
+    <FieldType>Repeating</FieldType>
+    <RepeatingGroupName>Networks</RepeatingGroupName>
+    <RepeatingGroupPath>Params/Params/ContractingNetworks</RepeatingGroupPath>
+    <RepeatingElementName>Networks</RepeatingElementName>
+  </Row>
+  
+  <Row>
+    <InputNode>Program</InputNode>
+    <OutputPath>Params/Params/ContractingNetworks/Networks/Program</OutputPath>
+    <FieldType>Repeating</FieldType>
+    <RepeatingGroupName>Networks</RepeatingGroupName>
+    <RepeatingGroupPath>Params/Params/ContractingNetworks</RepeatingGroupPath>
+    <RepeatingElementName>Networks</RepeatingElementName>
+  </Row>
+  
+  <Row>
+    <InputNode>EffectiveStartDate</InputNode>
+    <OutputPath>Params/Params/ContractingNetworks/Networks/EffectiveStartDate</OutputPath>
+    <FieldType>Repeating</FieldType>
+    <RepeatingGroupName>Networks</RepeatingGroupName>
+    <RepeatingGroupPath>Params/Params/ContractingNetworks</RepeatingGroupPath>
+    <RepeatingElementName>Networks</RepeatingElementName>
+  </Row>
+  
+  <Row>
+    <InputNode>EffectiveStartDate</InputNode>
+    <OutputPath>Params/Params/ContractingNetworks/Networks/EffectiveStartDate_unformatted</OutputPath>
+    <FieldType>Repeating</FieldType>
+    <RepeatingGroupName>Networks</RepeatingGroupName>
+    <RepeatingGroupPath>Params/Params/ContractingNetworks</RepeatingGroupPath>
+    <RepeatingElementName>Networks</RepeatingElementName>
+    <TransformRule>AppendTime</TransformRule>
+  </Row>
+  
+  <Row>
+    <InputNode>EffectiveEndDate</InputNode>
+    <OutputPath>Params/Params/ContractingNetworks/Networks/EffectiveEndDate</OutputPath>
+    <FieldType>Repeating</FieldType>
+    <RepeatingGroupName>Networks</RepeatingGroupName>
+    <RepeatingGroupPath>Params/Params/ContractingNetworks</RepeatingGroupPath>
+    <RepeatingElementName>Networks</RepeatingElementName>
+  </Row>
+  
+  <Row>
+    <InputNode>EffectiveEndDate</InputNode>
+    <OutputPath>Params/Params/ContractingNetworks/Networks/EffectiveEndDate_unformatted</OutputPath>
+    <FieldType>Repeating</FieldType>
+    <RepeatingGroupName>Networks</RepeatingGroupName>
+    <RepeatingGroupPath>Params/Params/ContractingNetworks</RepeatingGroupPath>
+    <RepeatingElementName>Networks</RepeatingElementName>
+    <TransformRule>AppendTime</TransformRule>
+  </Row>
+  
+  <Row>
+    <InputNode>ContractSpecaility</InputNode>
+    <OutputPath>Params/Params/ContractingNetworks/Networks/ContractSpeciality</OutputPath>
+    <FieldType>Repeating</FieldType>
+    <RepeatingGroupName>Networks</RepeatingGroupName>
+    <RepeatingGroupPath>Params/Params/ContractingNetworks</RepeatingGroupPath>
+    <RepeatingElementName>Networks</RepeatingElementName>
+  </Row>
+  
+  <Row>
+    <InputNode>NetworkActionType</InputNode>
+    <OutputPath>Params/Params/ContractingNetworks/Networks/NetworkActionType</OutputPath>
+    <FieldType>Repeating</FieldType>
+    <RepeatingGroupName>Networks</RepeatingGroupName>
+    <RepeatingGroupPath>Params/Params/ContractingNetworks</RepeatingGroupPath>
+    <RepeatingElementName>Networks</RepeatingElementName>
+  </Row>
+  
+  <Row>
+    <InputNode>ID</InputNode>
+    <OutputPath>Params/Params/ContractingNetworks/Networks/ID</OutputPath>
+    <FieldType>Repeating</FieldType>
+    <RepeatingGroupName>Networks</RepeatingGroupName>
+    <RepeatingGroupPath>Params/Params/ContractingNetworks</RepeatingGroupPath>
+    <RepeatingElementName>Networks</RepeatingElementName>
+  </Row>
+  
+  <!-- RelatedProviders - Repeating Group -->
+  <Row>
+    <InputNode>Name</InputNode>
+    <OutputPath>Params/Params/RelatedProviders/Name</OutputPath>
+    <FieldType>Repeating</FieldType>
+    <RepeatingGroupName>RelatedProviders</RepeatingGroupName>
+    <RepeatingGroupPath>Params/Params</RepeatingGroupPath>
+    <RepeatingElementName>RelatedProviders</RepeatingElementName>
+  </Row>
+  
+  <Row>
+    <InputNode>ProviderID</InputNode>
+    <OutputPath>Params/Params/RelatedProviders/ProviderID</OutputPath>
+    <FieldType>Repeating</FieldType>
+    <RepeatingGroupName>RelatedProviders</RepeatingGroupName>
+    <RepeatingGroupPath>Params/Params</RepeatingGroupPath>
+    <RepeatingElementName>RelatedProviders</RepeatingElementName>
+  </Row>
+  
+  <Row>
+    <InputNode>TaxID</InputNode>
+    <OutputPath>Params/Params/RelatedProviders/TaxID</OutputPath>
+    <FieldType>Repeating</FieldType>
+    <RepeatingGroupName>RelatedProviders</RepeatingGroupName>
+    <RepeatingGroupPath>Params/Params</RepeatingGroupPath>
+    <RepeatingElementName>RelatedProviders</RepeatingElementName>
+  </Row>
+  
+  <Row>
+    <InputNode>NPI</InputNode>
+    <OutputPath>Params/Params/RelatedProviders/NPI</OutputPath>
+    <FieldType>Repeating</FieldType>
+    <RepeatingGroupName>RelatedProviders</RepeatingGroupName>
+    <RepeatingGroupPath>Params/Params</RepeatingGroupPath>
+    <RepeatingElementName>RelatedProviders</RepeatingElementName>
+  </Row>
+  
+  <Row>
+    <InputNode>MedicaidID</InputNode>
+    <OutputPath>Params/Params/RelatedProviders/MedicaidID</OutputPath>
+    <FieldType>Repeating</FieldType>
+    <RepeatingGroupName>RelatedProviders</RepeatingGroupName>
+    <RepeatingGroupPath>Params/Params</RepeatingGroupPath>
+    <RepeatingElementName>RelatedProviders</RepeatingElementName>
+  </Row>
+  
+  <Row>
+    <InputNode>MedicareNumber</InputNode>
+    <OutputPath>Params/Params/RelatedProviders/MedicareNumber</OutputPath>
+    <FieldType>Repeating</FieldType>
+    <RepeatingGroupName>RelatedProviders</RepeatingGroupName>
+    <RepeatingGroupPath>Params/Params</RepeatingGroupPath>
+    <RepeatingElementName>RelatedProviders</RepeatingElementName>
+  </Row>
+  
+  <!-- MasterClauseData - Simple fields with optionName attribute -->
+  <Row>
+    <InputNode>Non_Standard_Clauses</InputNode>
+    <OutputPath>MasterClauseData/Billing_Requirements</OutputPath>
+    <FieldType>Simple</FieldType>
+  </Row>
+  
+  <Row>
+    <InputNode>Clause_Language</InputNode>
+    <OutputPath>MasterClauseData/Confidentiality</OutputPath>
+    <FieldType>Simple</FieldType>
+  </Row>
+  
+  <!-- Static elements - always created empty -->
+  <Row>
+    <InputNode></InputNode>
+    <OutputPath>LogXml/LogEntry</OutputPath>
+    <FieldType>Static</FieldType>
+  </Row>
+  
+  <Row>
+    <InputNode></InputNode>
+    <OutputPath>Alternate_Language_Requests</OutputPath>
+    <FieldType>Static</FieldType>
+  </Row>
+  
+</Rows>

@@ -1,0 +1,78 @@
+<MasterXml>
+  <CLM_Agreement_ID>CLM-27292</CLM_Agreement_ID>
+  <CORE_NetworkNames>
+    <NetworkName>Network P</NetworkName>
+  </CORE_NetworkNames>
+  <Params>
+    <Params>
+      <CreatedBy>firstName_lastName@bcbst.com</CreatedBy>
+      <CreatedDate>2025-12-18</CreatedDate>
+      <WKFID>OCLM-0000000</WKFID>
+      <ContractEntityName>TEST test</ContractEntityName>
+      <HospitalBased />
+      <SchoolBased />
+      <PracticingAs />
+      <HoldContract />
+      <AuthorizedSignatoryName>TEst test</AuthorizedSignatoryName>
+      <AuthorizedSignatoryEmail>ligon@test.com</AuthorizedSignatoryEmail>
+      <AuthorizedSignatoryTitle>aw awddaw</AuthorizedSignatoryTitle>
+      <ProviderType>Provider</ProviderType>
+      <BusinessUnit>Provider</BusinessUnit>
+      <ActionType>Contract</ActionType>
+      <ContractTemplate>Commercial</ContractTemplate>
+      <DocumentControlNumber>OCLM-0000000</DocumentControlNumber>
+      <EffectiveDate>2029-01-01</EffectiveDate>
+      <ApprovalRegion />
+      <Tier />
+      <ContractingNetworks>
+        <Networks
+          displayName=""
+          displayValue="">
+          <LOB>Commercial</LOB>
+          <Network
+            key="Network P">Network P</Network>
+          <Program>Specialty</Program>
+          <EffectiveStartDate>2031-01-01</EffectiveStartDate>
+          <EffectiveStartDate_unformatted>2031-01-01T00:00:00</EffectiveStartDate_unformatted>
+          <EffectiveEndDate>2032-01-02</EffectiveEndDate>
+          <EffectiveEndDate_unformatted>2032-01-02T00:00:00</EffectiveEndDate_unformatted>
+          <ContractSpeciality
+            key="Acute Care Rural">Acute Care Rural</ContractSpeciality>
+          <NetworkActionType
+            key="Add">Add</NetworkActionType>
+          <ID>AGREMETN1233</ID>
+        </Networks>
+      </ContractingNetworks>
+      <RelatedProviders
+        displayName=""
+        displayValue="">
+        <Name>Provider One</Name>
+        <ProviderID>ProviderID</ProviderID>
+        <TaxID>TaxID</TaxID>
+        <NPI>NPI22</NPI>
+        <MedicaidID>Mediccaid</MedicaidID>
+        <MedicareNumber />
+      </RelatedProviders>
+      <RelatedProviders
+        displayName=""
+        displayValue="">
+        <Name>NOTest</Name>
+        <ProviderID>ProviderTest</ProviderID>
+        <TaxID>Tax22</TaxID>
+        <NPI>NPI123</NPI>
+        <MedicaidID>dawwad</MedicaidID>
+        <MedicareNumber />
+      </RelatedProviders>
+    </Params>
+  </Params>
+  <LogXml>
+    <LogEntry />
+  </LogXml>
+  <MasterClauseData>
+    <Billing_Requirements
+      optionName="Custom">awdljadkjl wadjlkwdakjl awdjlkadwlj</Billing_Requirements>
+    <Confidentiality
+      optionName="Custom">adwjkldawkjl awdljwdalj adwljwdajl</Confidentiality>
+  </MasterClauseData>
+  <Alternate_Language_Requests />
+</MasterXml>

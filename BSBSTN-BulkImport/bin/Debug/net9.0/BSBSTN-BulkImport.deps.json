@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "BSBSTN-BulkImport/1.0.0": {
+        "runtime": {
+          "BSBSTN-BulkImport.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "BSBSTN-BulkImport/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
