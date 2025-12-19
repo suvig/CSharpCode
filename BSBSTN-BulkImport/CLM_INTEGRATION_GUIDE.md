@@ -3,7 +3,7 @@
 ## What You Need to Copy to CLM
 
 ### 1. XmlTransformerCore.cs (Required)
-**Copy the entire file content** from [XmlTransformerCore.cs](XmlTransformerCore.cs) into your CLM C# Expression.
+**Copy the entire file content** from [XmlTransformerCore.cs](XmlTransformerCore.cs) into your CLM C# Expression. 
 
 ### 2. MappingConfig.xml as String (Required)
 Convert the [MappingConfig.xml](MappingConfig.xml) to a string variable in CLM.
