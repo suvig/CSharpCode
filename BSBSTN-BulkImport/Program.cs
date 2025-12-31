@@ -17,6 +17,13 @@ namespace BSBSTN_BulkImport
             string projectDir = Directory.GetCurrentDirectory();
             string mappingConfigPath = Path.Combine(projectDir, "MappingConfig.xml");
             string csvPath = Path.Combine(projectDir, "input", "OCLMLoadsheet.csv");
+            if (args.Length > 0 && !string.IsNullOrWhiteSpace(args[0]))
+            {
+                string providedPath = args[0].Trim();
+                csvPath = Path.IsPathRooted(providedPath)
+                    ? providedPath
+                    : Path.GetFullPath(Path.Combine(projectDir, providedPath));
+            }
             
             // Check if mapping config exists
             if (!File.Exists(mappingConfigPath))

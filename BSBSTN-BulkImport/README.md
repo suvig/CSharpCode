@@ -191,12 +191,10 @@ Transforms the value before output:
   <InputNode>WKFID</InputNode>
   <OutputPath>CLM_Agreement_ID</OutputPath>
   <FieldType>Calculated</FieldType>
-  <TransformRule>Replace 'OCLM' with 'CLM'</TransformRule>
 </Field>
 ```
 
 ### Transform Rules
-- `Replace 'OCLM' with 'CLM'` - String replacement
 - `FirstPipeValue` - Takes first value from pipe-separated list
 - `AppendTime` - Adds `T00:00:00` to dates
 
@@ -304,3 +302,12 @@ return result; // Use in CLM workflow
 **Version:** 1.0  
 **Last Updated:** December 18, 2025  
 **Target Framework:** .NET 9.0 (compatible with .NET 6.0+)
+
+
+
+Done Dec 31:
+1) Update code to have de-dupe logic for the Core Networks.
+2) Make sure all the csv is mapped and generate the proper xml structure.
+3) Hardcode values
+4) RepeatingGroupName & RepeatingElementName
+

@@ -16,7 +16,6 @@ string mappingXml = @"<?xml version=""1.0"" encoding=""utf-8""?>
     <InputNode>WKFID</InputNode>
     <OutputPath>CLM_Agreement_ID</OutputPath>
     <FieldType>Calculated</FieldType>
-    <TransformRule>Replace 'OCLM' with 'CLM'</TransformRule>
   </Field>
   <!-- ... rest of mapping config ... -->
 </MappingConfiguration>";
