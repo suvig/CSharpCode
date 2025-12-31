@@ -105,7 +105,7 @@ static System.Collections.Generic.List<System.Collections.Generic.Dictionary<str
         mapping["FieldType"] = GetElementValue(fieldElement, "FieldType");
         mapping["RepeatingGroupName"] = GetElementValue(fieldElement, "RepeatingGroupName");
         mapping["RepeatingGroupPath"] = GetElementValue(fieldElement, "RepeatingGroupPath");
-        mapping["RepeatingElementName"] = GetElementValue(fieldElement, "RepeatingElementName");
+        mapping["DefaultValue"] = GetElementValue(fieldElement, "DefaultValue");
         mapping["TransformRule"] = GetElementValue(fieldElement, "TransformRule");
         
         mappings.Add(mapping);
@@ -129,6 +129,10 @@ static System.Xml.XmlDocument BuildOutputXml(System.Collections.Generic.Dictiona
         if (mappings[i]["FieldType"] == "Simple" || mappings[i]["FieldType"] == "Calculated")
         {
             ProcessSimpleField(doc, root, inputData, mappings[i]);
+        }
+        else if (mappings[i]["FieldType"] == "List")
+        {
+            ProcessListField(doc, root, inputData, mappings[i]);
         }
     }
     
@@ -185,10 +189,23 @@ static void ProcessStaticField(System.Xml.XmlDocument doc, System.Xml.XmlElement
 static void ProcessSimpleField(System.Xml.XmlDocument doc, System.Xml.XmlElement root, 
     System.Collections.Generic.Dictionary<string, string> inputData, System.Collections.Generic.Dictionary<string, string> mapping)
 {
-    if (!inputData.ContainsKey(mapping["InputNode"]))
-        return;
+    string inputNode = mapping["InputNode"];
+    string value = null;
     
-    string value = inputData[mapping["InputNode"]];
+    if (!string.IsNullOrEmpty(inputNode) && inputData.ContainsKey(inputNode))
+    {
+        value = inputData[inputNode];
+    }
+    
+    if (string.IsNullOrWhiteSpace(value))
+    {
+        string defaultValue = mapping["DefaultValue"];
+        if (string.IsNullOrWhiteSpace(defaultValue))
+        {
+            return;
+        }
+        value = defaultValue;
+    }
     
     // Apply transformations
     value = ApplyTransformRule(value, mapping["TransformRule"]);
@@ -196,6 +213,59 @@ static void ProcessSimpleField(System.Xml.XmlDocument doc, System.Xml.XmlElement
     // Create the path in output XML
     System.Xml.XmlElement targetElement = EnsurePathExists(doc, root, mapping["OutputPath"]);
     targetElement.InnerText = value;
+}
+
+/// <summary>
+/// Process a list field (creates multiple elements under the parent path)
+/// </summary>
+static void ProcessListField(System.Xml.XmlDocument doc, System.Xml.XmlElement root,
+    System.Collections.Generic.Dictionary<string, string> inputData, System.Collections.Generic.Dictionary<string, string> mapping)
+{
+    string inputNode = mapping["InputNode"];
+    string value = null;
+    
+    if (!string.IsNullOrEmpty(inputNode) && inputData.ContainsKey(inputNode))
+    {
+        value = inputData[inputNode];
+    }
+    
+    if (string.IsNullOrWhiteSpace(value))
+    {
+        string defaultValue = mapping["DefaultValue"];
+        if (string.IsNullOrWhiteSpace(defaultValue))
+        {
+            return;
+        }
+        value = defaultValue;
+    }
+    
+    string[] parts = value.Split('|');
+    System.Collections.Generic.List<string> values = new System.Collections.Generic.List<string>();
+    for (int i = 0; i < parts.Length; i++)
+    {
+        string part = parts[i].Trim();
+        if (!string.IsNullOrWhiteSpace(part))
+        {
+            values.Add(part);
+        }
+    }
+    
+    values = ApplyListTransformRule(values, mapping["TransformRule"]);
+    if (values.Count == 0)
+        return;
+    
+    string outputPath = mapping["OutputPath"];
+    string parentPath = ExtractParentPath(outputPath);
+    string childElementName = ExtractChildElementName(outputPath);
+    
+    System.Xml.XmlElement parentElement = EnsurePathExists(doc, root, parentPath);
+    
+    for (int i = 0; i < values.Count; i++)
+    {
+        System.Xml.XmlElement childElement = doc.CreateElement(childElementName);
+        childElement.InnerText = values[i];
+        parentElement.AppendChild(childElement);
+    }
 }
 
 /// <summary>
@@ -239,7 +309,7 @@ static void ProcessRepeatingGroup(System.Xml.XmlDocument doc, System.Xml.XmlElem
     // Create repeating elements
     for (int i = 0; i < maxCount; i++)
     {
-        System.Xml.XmlElement repeatingElement = doc.CreateElement(firstMapping["RepeatingElementName"]);
+        System.Xml.XmlElement repeatingElement = doc.CreateElement(firstMapping["RepeatingGroupName"]);
         
         // Add all fields for this instance
         for (int j = 0; j < groupMappings.Count; j++)
@@ -259,13 +329,17 @@ static void ProcessRepeatingGroup(System.Xml.XmlDocument doc, System.Xml.XmlElem
             // Apply transformations
             value = ApplyTransformRule(value, mapping["TransformRule"]);
             
-            // Extract the child element name from output path
-            string childElementName = ExtractChildElementName(mapping["OutputPath"]);
-            
-            System.Xml.XmlElement childElement = doc.CreateElement(childElementName);
-            childElement.InnerText = value;
-            
-            repeatingElement.AppendChild(childElement);
+            // Create nested path under the repeating element (supports Addresses/Address/... etc.)
+            string relativePath = ExtractRelativePath(mapping["OutputPath"], firstMapping["RepeatingGroupPath"], firstMapping["RepeatingGroupName"]);
+            if (string.IsNullOrEmpty(relativePath))
+            {
+                repeatingElement.InnerText = value;
+            }
+            else
+            {
+                System.Xml.XmlElement childElement = EnsurePathExistsUnder(doc, repeatingElement, relativePath);
+                childElement.InnerText = value;
+            }
         }
         
         parentElement.AppendChild(repeatingElement);
@@ -309,12 +383,131 @@ static System.Xml.XmlElement EnsurePathExists(System.Xml.XmlDocument doc, System
 }
 
 /// <summary>
+/// Ensure the relative path exists under a given parent element
+/// </summary>
+static System.Xml.XmlElement EnsurePathExistsUnder(System.Xml.XmlDocument doc, System.Xml.XmlElement parent, string path)
+{
+    string[] parts = path.Split('/');
+    System.Xml.XmlElement current = parent;
+    
+    for (int i = 0; i < parts.Length; i++)
+    {
+        string part = parts[i];
+        if (string.IsNullOrEmpty(part))
+            continue;
+        
+        System.Xml.XmlElement child = null;
+        System.Xml.XmlNodeList children = current.ChildNodes;
+        for (int j = 0; j < children.Count; j++)
+        {
+            if (children[j].NodeType == System.Xml.XmlNodeType.Element && children[j].LocalName == part)
+            {
+                child = (System.Xml.XmlElement)children[j];
+                break;
+            }
+        }
+        
+        if (child == null)
+        {
+            child = doc.CreateElement(part);
+            current.AppendChild(child);
+        }
+        current = child;
+    }
+    
+    return current;
+}
+
+/// <summary>
 /// Extract the last element name from a path
 /// </summary>
 static string ExtractChildElementName(string outputPath)
 {
     string[] parts = outputPath.Split('/');
     return parts[parts.Length - 1];
+}
+
+/// <summary>
+/// Extract the portion of the output path that is relative to the repeating element
+/// </summary>
+static string ExtractRelativePath(string outputPath, string groupPath, string groupElementName)
+{
+    if (string.IsNullOrEmpty(outputPath))
+        return string.Empty;
+    
+    string trimmedGroupPath = groupPath == null ? string.Empty : groupPath.Trim('/');
+    string trimmedGroupElementName = groupElementName == null ? string.Empty : groupElementName.Trim('/');
+    string prefix = trimmedGroupPath;
+    
+    if (!string.IsNullOrEmpty(trimmedGroupElementName))
+    {
+        if (!string.IsNullOrEmpty(prefix))
+            prefix += "/";
+        prefix += trimmedGroupElementName;
+    }
+    
+    if (string.IsNullOrEmpty(prefix))
+        return outputPath.Trim('/');
+    
+    string normalizedOutput = outputPath.Trim('/');
+    if (normalizedOutput.Equals(prefix, System.StringComparison.OrdinalIgnoreCase))
+        return string.Empty;
+    
+    string prefixWithSlash = prefix + "/";
+    if (normalizedOutput.StartsWith(prefixWithSlash, System.StringComparison.OrdinalIgnoreCase))
+        return normalizedOutput.Substring(prefixWithSlash.Length);
+    
+    // Fallback: path doesn't match the expected prefix, so use full path as relative
+    return normalizedOutput;
+}
+
+/// <summary>
+/// Extract the parent path (all but last segment)
+/// </summary>
+static string ExtractParentPath(string outputPath)
+{
+    string[] parts = outputPath.Split('/');
+    if (parts.Length <= 1)
+        return string.Empty;
+    
+    System.Text.StringBuilder builder = new System.Text.StringBuilder();
+    for (int i = 0; i < parts.Length - 1; i++)
+    {
+        if (string.IsNullOrEmpty(parts[i]))
+            continue;
+        
+        if (builder.Length > 0)
+            builder.Append('/');
+        builder.Append(parts[i]);
+    }
+    
+    return builder.ToString();
+}
+
+/// <summary>
+/// Apply list transformation rules to values
+/// </summary>
+static System.Collections.Generic.List<string> ApplyListTransformRule(System.Collections.Generic.List<string> values, string rule)
+{
+    if (string.IsNullOrEmpty(rule))
+        return values;
+    
+    if (rule == "DistinctValues")
+    {
+        System.Collections.Generic.HashSet<string> seen = new System.Collections.Generic.HashSet<string>(System.StringComparer.OrdinalIgnoreCase);
+        System.Collections.Generic.List<string> distinct = new System.Collections.Generic.List<string>();
+        for (int i = 0; i < values.Count; i++)
+        {
+            string value = values[i];
+            if (seen.Add(value))
+            {
+                distinct.Add(value);
+            }
+        }
+        return distinct;
+    }
+    
+    return values;
 }
 
 /// <summary>
@@ -325,11 +518,7 @@ static string ApplyTransformRule(string value, string rule)
     if (string.IsNullOrEmpty(rule))
         return value;
     
-    if (rule == "Replace 'OCLM' with 'CLM'")
-    {
-        return value.Replace("OCLM", "CLM");
-    }
-    else if (rule == "FirstPipeValue")
+    if (rule == "FirstPipeValue")
     {
         string[] parts = value.Split('|');
         if (parts.Length > 0)
