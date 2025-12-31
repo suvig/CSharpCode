@@ -1,0 +1,127 @@
+<Params>
+		<CreatedBy>Pandy_Buske@bcbst.com</CreatedBy>
+		<CreatedDate>2025-12-23</CreatedDate>
+		<WKFID>48294833</WKFID>
+		<ProjectName/>
+		<ContractEntityName>Walliser Medical Center</ContractEntityName>
+		<HospitalBased>false</HospitalBased>
+		<SchoolBased>false</SchoolBased>
+		<PracticingAs>false</PracticingAs>
+		<HoldContract>false</HoldContract>
+		<AuthorizedSignatoryName>Lauren Walliser</AuthorizedSignatoryName>
+		<AuthorizedSignatoryEmail>pandy_buske@bcbst.com</AuthorizedSignatoryEmail>
+		<AuthorizedSignatoryTitle>FNP C</AuthorizedSignatoryTitle>
+		<ProviderType>Professional Provider</ProviderType>
+		<BusinessUnit>Provider</BusinessUnit>
+		<ActionType>Contract</ActionType>
+		<ContractTemplate>Commercial</ContractTemplate>
+		<DocumentControlNumber>OCLM-00000</DocumentControlNumber>
+		<EffectiveDate>2026-02-01</EffectiveDate>
+		<ApprovalRegion>3</ApprovalRegion>
+
+		<Existing_CLMID_Flag>false</Existing_CLMID_Flag>
+		<Parent_Agreement_Included>true</Parent_Agreement_Included>
+		<Parent_Agreement_Upload>34c11c8f-8943-484c-8b55-ba529da7801c</Parent_Agreement_Upload>
+
+		<Tier/>
+		<ContractingNetworks>
+			<Networks>
+				<LOB>Commercial</LOB>
+				<Program>NA</Program>
+				<Network>Blue Network P</Network>
+				<AgreementId/>
+				<ContractSpeciality>Primary Care Provider (PCP)</ContractSpeciality>
+				<EffectiveStartDate/>
+				<EffectiveEndDate/>
+			</Networks>
+			<Networks>
+				<LOB>Commercial</LOB>
+				<Program>NA</Program>
+				<Network>Blue Network S</Network>
+				<AgreementId/>
+				<ContractSpeciality>Primary Care Provider (PCP)</ContractSpeciality>
+				<EffectiveStartDate/>
+				<EffectiveEndDate/>
+			</Networks>
+			<Networks>
+				<LOB>Commercial</LOB>
+				<Program>NA</Program>
+				<Network>Blue Network E</Network>
+				<AgreementId/>
+				<ContractSpeciality>Primary Care Provider (PCP)</ContractSpeciality>
+				<EffectiveStartDate/>
+				<EffectiveEndDate/>
+			</Networks>
+			<Networks>
+				<LOB>Commercial</LOB>
+				<Program>QIP</Program>
+				<Network>BlueAdvantage MA PPO</Network>
+				<AgreementId/>
+				<ContractSpeciality>Primary Care Provider (PCP)</ContractSpeciality>
+				<EffectiveStartDate/>
+				<EffectiveEndDate/>
+			</Networks>
+		</ContractingNetworks>
+		<RelatedProviders>
+			<Provider>
+				<ProviderID>8001394</ProviderID>
+				<TaxID>334851606</TaxID>
+				<NPI>1538958574</NPI>
+				<MedicaidID/>
+				<MedicareNumber/>
+				<Name>Sentef Medical Center</Name>
+				<Addresses>
+					<Address>
+						<AddressLine1>9380 BRADMORE LN Ste 104</AddressLine1>
+						<AddressLine2/>
+						<City>OOLTEWAH</City>
+						<State>TN</State>
+						<Zip>37363</Zip>
+					</Address>
+				</Addresses>
+			</Provider>
+			<Provider>
+				<ProviderID>8001394</ProviderID>
+				<TaxID>334851606</TaxID>
+				<NPI>1538958574</NPI>
+				<MedicaidID/>
+				<MedicareNumber/>
+				<Name>Sentef Medical Center</Name>
+				<Addresses>
+					<Address>
+						<AddressLine1>9385 BRADMORE LN Ste 104</AddressLine1>
+						<AddressLine2/>
+						<City>OOLTEWAH</City>
+						<State>TN</State>
+						<Zip>37363</Zip>
+					</Address>
+				</Addresses>
+			</Provider>
+		</RelatedProviders>
+
+        <ApprovalList>
+            <WFApprovalList>
+            <Approver>
+                <Role>PNC Director</Role>
+                <Email>Jeffrey_Leyman@bcbst.com</Email>
+                <CurrentDate>2025-12-23</CurrentDate>
+            </Approver>
+            <Approver>
+                <Role>PNC VP</Role>
+                <Email>susan_buchanan@bcbst.com</Email>
+                <CurrentDate>2025-12-23</CurrentDate>
+            </Approver>
+            <Approver>
+                <Role>PNM SR VP</Role>
+                <Email>marc_barclay@bcbst.com</Email>
+                <CurrentDate>2025-12-23</CurrentDate>
+            </Approver>
+            <Approver>
+                <Role>Provider Legal</Role>
+                <Email />
+                <CurrentDate>2025-12-23</CurrentDate>
+            </Approver>
+            </WFApprovalList>
+        </ApprovalList>
+
+</Params>

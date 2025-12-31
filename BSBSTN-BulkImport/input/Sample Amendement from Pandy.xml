@@ -1,0 +1,58 @@
+<Params>
+			<CreatedBy>pandy_buske@bcbst.com</CreatedBy>
+			<CreatedDate>2025-12-23</CreatedDate>
+			<WKFID>47922400</WKFID>
+			<ProjectName/>
+			<ContractEntityName>Blount MEM Recreate v2 PB</ContractEntityName>
+			<HospitalBased>false</HospitalBased>
+			<SchoolBased>false</SchoolBased>
+			<PracticingAs>false</PracticingAs>
+			<HoldContract>false</HoldContract>
+			<AuthorizedSignatoryName>FName LName</AuthorizedSignatoryName>
+			<AuthorizedSignatoryEmail>Pandy_Buske@bcbst.com</AuthorizedSignatoryEmail>
+			<AuthorizedSignatoryTitle>Test</AuthorizedSignatoryTitle>
+			<ProviderType>Professional Provider</ProviderType>
+			<BusinessUnit>Provider</BusinessUnit>
+			<ActionType>Amendment - Signed</ActionType>
+			<ContractTemplate>Commercial</ContractTemplate>
+			<DocumentControlNumber>COUNT-9999999</DocumentControlNumber>
+			<EffectiveDate/>
+			<ApprovalRegion>2</ApprovalRegion>
+			<Tier/>
+			<AmendmentIntent>Update Network,</AmendmentIntent>
+			<CLM_Parent_Agreement_ID/>
+			<Existing_CLMID_Flag>false</Existing_CLMID_Flag>
+			<Parent_Agreement_Included>true</Parent_Agreement_Included>
+			<Parent_Agreement_Upload>34c11c8f-8943-484c-8b55-ba529da7801c</Parent_Agreement_Upload>
+			<ContractingNetworks>
+				<Networks>
+					<NetworkActionType>Replace</NetworkActionType>
+					<LOB>Commercial</LOB>
+					<Program>NA</Program>
+					<Network>Behavioral Health</Network>
+					<AgreementId/>
+					<ContractSpeciality>Behavioral Health</ContractSpeciality>
+					<EffectiveStartDate/>
+					<EffectiveEndDate/>
+				</Networks>
+			</ContractingNetworks>
+			<RelatedProviders>
+				<Provider>
+					<ProviderID>4334861</ProviderID>
+					<TaxID>123456789</TaxID>
+					<NPI>12345674890</NPI>
+					<MedicaidID>9999999</MedicaidID>
+					<MedicareNumber/>
+					<Name>Blount MEM Recreate v2 PB</Name>
+					<Addresses>
+						<Address>
+							<AddressLine1>123 Test Ave</AddressLine1>
+							<AddressLine2/>
+							<City>Chattanooga</City>
+							<State>TN</State>
+							<Zip>37402</Zip>
+						</Address>
+					</Addresses>
+				</Provider>
+			</RelatedProviders>
+</Params>
