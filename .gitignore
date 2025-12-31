@@ -17,6 +17,7 @@ x86/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
+**/obj/**
 
 # .NET Core
 project.lock.json
@@ -31,4 +32,5 @@ artifacts/
 .vscode/
 
 # macOS
-.DS_Store
+**/.DS_Store
+
