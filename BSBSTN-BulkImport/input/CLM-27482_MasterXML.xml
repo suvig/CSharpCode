@@ -1,0 +1,133 @@
+<MasterXml>
+  <CLM_Agreement_ID>CLM-27482</CLM_Agreement_ID>
+  <CORE_NetworkNames>
+    <NetworkName>Network P</NetworkName>
+    <NetworkName>Network P</NetworkName>
+    <NetworkName>Network S</NetworkName>
+    <NetworkName>Network P</NetworkName>
+  </CORE_NetworkNames>
+  <Params>
+    <Params>
+      <CreatedBy>pandy_buske@bcbst.com</CreatedBy>
+      <CreatedDate>2025-12-30</CreatedDate>
+      <WKFID>OCLM-0000000</WKFID>
+      <ProjectName>&lt;ProjectName&gt;My Project Value&lt;/ProjectName&gt;</ProjectName>
+      <ContractEntityName>ContractEntityName</ContractEntityName>
+      <HospitalBased />
+      <SchoolBased />
+      <PracticingAs />
+      <HoldContract />
+      <AuthorizedSignatoryName>AuthorizedSignatoryName</AuthorizedSignatoryName>
+      <AuthorizedSignatoryEmail>AuthorizedSignatoryEmail@test.com</AuthorizedSignatoryEmail>
+      <AuthorizedSignatoryTitle>AuthorizedSignatoryTitle</AuthorizedSignatoryTitle>
+      <ProviderType>Professional Provider</ProviderType>
+      <BusinessUnit>Provider</BusinessUnit>
+      <ActionType>Contract</ActionType>
+      <ContractTemplate>Commercial</ContractTemplate>
+      <DocumentControlNumber>OCLM-0000000</DocumentControlNumber>
+      <EffectiveDate>2026-01-09</EffectiveDate>
+      <ApprovalRegion />
+      <Tier />
+      <ContractingNetworks>
+        <Networks
+          displayName=""
+          displayValue="">
+          <LOB>Commercial</LOB>
+          <Network
+            key="Network P">Network P</Network>
+          <Program>Program&gt;QCPI</Program>
+          <EffectiveStartDate>2026-01-09</EffectiveStartDate>
+          <EffectiveStartDate_unformatted>2026-01-09T00:00:00</EffectiveStartDate_unformatted>
+          <EffectiveEndDate>2029-01-09</EffectiveEndDate>
+          <EffectiveEndDate_unformatted>2029-01-09T00:00:00</EffectiveEndDate_unformatted>
+          <ContractSpeciality
+            key="Primary Care Provider (PCP)">Primary Care Provider (PCP)</ContractSpeciality>
+          <NetworkActionType
+            key="" />
+          <ID>ICSDSCM21009</ID>
+        </Networks>
+        <Networks
+          displayName=""
+          displayValue="">
+          <LOB>Commercial</LOB>
+          <Network
+            key="Network P">Network P</Network>
+          <Program />
+          <EffectiveStartDate>2026-01-09</EffectiveStartDate>
+          <EffectiveStartDate_unformatted>2026-01-09T00:00:00</EffectiveStartDate_unformatted>
+          <EffectiveEndDate>2029-01-09</EffectiveEndDate>
+          <EffectiveEndDate_unformatted>2029-01-09T00:00:00</EffectiveEndDate_unformatted>
+          <ContractSpeciality
+            key="Specialist">Specialist</ContractSpeciality>
+          <NetworkActionType
+            key="" />
+          <ID>ICSDSCM21010</ID>
+        </Networks>
+        <Networks
+          displayName=""
+          displayValue="">
+          <LOB>Commercial</LOB>
+          <Network
+            key="Network S">Network S</Network>
+          <Program>MIDLVLCOMM</Program>
+          <EffectiveStartDate>2026-01-09</EffectiveStartDate>
+          <EffectiveStartDate_unformatted>2026-01-09T00:00:00</EffectiveStartDate_unformatted>
+          <EffectiveEndDate>2029-01-09</EffectiveEndDate>
+          <EffectiveEndDate_unformatted>2029-01-09T00:00:00</EffectiveEndDate_unformatted>
+          <ContractSpeciality
+            key="Audiologist">Audiologist</ContractSpeciality>
+          <NetworkActionType
+            key="" />
+          <ID>ICSDSCM21012</ID>
+        </Networks>
+        <Networks
+          displayName=""
+          displayValue="">
+          <LOB>Commercial</LOB>
+          <Network
+            key="Network P">Network P</Network>
+          <Program>MIDLVLBOTH</Program>
+          <EffectiveStartDate>2026-01-09</EffectiveStartDate>
+          <EffectiveStartDate_unformatted>2026-01-09T00:00:00</EffectiveStartDate_unformatted>
+          <EffectiveEndDate>2029-01-09</EffectiveEndDate>
+          <EffectiveEndDate_unformatted>2029-01-09T00:00:00</EffectiveEndDate_unformatted>
+          <ContractSpeciality
+            key="Dietician">Dietician</ContractSpeciality>
+          <NetworkActionType
+            key="" />
+          <ID>ICSDSCM21014</ID>
+        </Networks>
+      </ContractingNetworks>
+      <RelatedProviders
+        displayName=""
+        displayValue="">
+        <Name>Related Provider 1</Name>
+        <ProviderID>1111111</ProviderID>
+        <TaxID>123456789</TaxID>
+        <NPI>1234567891</NPI>
+        <MedicaidID>MCaid ID1</MedicaidID>
+        <MedicareNumber>MCare Nbr1</MedicareNumber>
+      </RelatedProviders>
+      <RelatedProviders
+        displayName=""
+        displayValue="">
+        <Name>Related Provider 1</Name>
+        <ProviderID>2222222</ProviderID>
+        <TaxID>123456789</TaxID>
+        <NPI>1234567892</NPI>
+        <MedicaidID>MCaid ID2</MedicaidID>
+        <MedicareNumber>MCare Nbr2</MedicareNumber>
+      </RelatedProviders>
+    </Params>
+  </Params>
+  <LogXml>
+    <LogEntry />
+  </LogXml>
+  <MasterClauseData>
+    <Without_Cause_Termination
+      optionName="Custom">Without Cause Termination Language entry</Without_Cause_Termination>
+    <Confidentiality
+      optionName="Custom">Confidentiality Language entry </Confidentiality>
+  </MasterClauseData>
+  <Alternate_Language_Requests />
+</MasterXml>
