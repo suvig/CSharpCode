@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BSBSTN-BulkImport")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1422ccec40aa35c076aa6740ce8fc799cac155c2")]
 [assembly: System.Reflection.AssemblyProductAttribute("BSBSTN-BulkImport")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BSBSTN-BulkImport")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
