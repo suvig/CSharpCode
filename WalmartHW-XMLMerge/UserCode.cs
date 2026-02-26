@@ -1,5 +1,4 @@
 using System.Xml;
-using System.Xml.XPath;
 
 internal static class UserCode
 {
@@ -107,17 +106,11 @@ internal static class UserCode
         {
             if (string.IsNullOrWhiteSpace(condition)) return true;
             var nav = targetDoc.CreateNavigator();
-            var expr = XPathExpression.Compile(condition.Trim());
+            var expr = System.Xml.XPath.XPathExpression.Compile(condition.Trim());
             var result = nav.Evaluate(expr);
+            if (result is bool b) return b;
 
-            return result switch
-            {
-                bool b => b,
-                XPathNodeIterator it => it.MoveNext(),
-                string s => !string.IsNullOrEmpty(s),
-                double d => d != 0,
-                _ => throw new Exception($"Unsupported XPath result type: {result?.GetType().FullName}")
-            };
+            throw new Exception("Condition must evaluate to a boolean.");
         }
 
         // =====================
