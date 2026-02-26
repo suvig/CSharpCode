@@ -1,0 +1,51 @@
+<Rows>
+    <Row>
+        <Notes></Notes>
+        <Condition>boolean( //SYS_Route='Validate Input Data' )</Condition>
+        <Action>Add</Action>
+        <SourceNode>//Contract_Manager_Information</SourceNode>
+        <TargetNode>//TemplateFieldData</TargetNode>
+    </Row>
+    <Row>
+        <Notes></Notes>
+        <Condition>boolean( //SYS_Route='Validate Input Data' )</Condition>
+        <Action>Update</Action>
+        <SourceNode>//Business_Area</SourceNode>
+        <TargetNode>//Business_Area</TargetNode>
+    </Row>
+    <Row>
+        <Notes></Notes>
+        <Condition>boolean( //SYS_Route='Validate Input Data' )</Condition>
+        <Action>Update</Action>
+        <SourceNode>//Additional_Information/Spend_and_Expenses</SourceNode>
+        <TargetNode>//Additional_Information/Spend_and_Expenses</TargetNode>
+    </Row>
+    <Row>
+        <Notes></Notes>
+        <Condition>boolean( //SYS_Route='Validate Input Data' )</Condition>
+        <Action>Update</Action>
+        <SourceNode>//Contract_Manager_Information/SYS_Submitted_By_Name</SourceNode>
+        <TargetNode>//System//SYS_Submitted_By_Name</TargetNode>
+    </Row>
+    <Row>
+        <Notes></Notes>
+        <Condition>boolean( //SYS_Route='Validate Input Data' )</Condition>
+        <Action>Update</Action>
+        <SourceNode>//Contract_Manager_Information/SYS_Submitted_By_Email</SourceNode>
+        <TargetNode>//System//SYS_Submitted_By_Email</TargetNode>
+    </Row>
+    <Row>
+        <Notes></Notes>
+        <Condition>boolean( //SYS_Route='Validate Input Data' )</Condition>
+        <Action>Delete</Action>
+        <SourceNode></SourceNode>
+        <TargetNode>//Contract_Manager_Information/SYS_Submitted_By_Name</TargetNode>
+    </Row>
+    <Row>
+        <Notes></Notes>
+        <Condition>boolean( //SYS_Route='Validate Input Data' )</Condition>
+        <Action>Delete</Action>
+        <SourceNode></SourceNode>
+        <TargetNode>//Contract_Manager_Information/SYS_Submitted_By_Email</TargetNode>
+    </Row>
+</Rows>

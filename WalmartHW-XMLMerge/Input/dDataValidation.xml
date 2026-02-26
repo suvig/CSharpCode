@@ -1,0 +1,44 @@
+<Params>
+    <Documents>
+        <Document xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <Id>203852a4-b842-414a-ba3a-f8ab3fa682d3</Id>
+            <Description />
+            <Name>HW - Intake Validation_20260226_143027.docx</Name>
+            <ParentFolderId>1e95b9c2-c0fb-f011-b777-88e9a4bd2dee</ParentFolderId>
+            <CreatedBy>Suvig.Boyed@docusign.com</CreatedBy>
+            <CreatedDate>2026-02-26T08:30:28.37</CreatedDate>
+            <ParentFolderName>Temp</ParentFolderName>
+            <UpdatedBy>Suvig.Boyed@docusign.com</UpdatedBy>
+            <UpdatedDate>2026-02-26T08:30:28.37</UpdatedDate>
+            <IsFormDocument>false</IsFormDocument>
+            <IsTermDocument>false</IsTermDocument>
+            <EditDocumentURL>https://uatna11.springcm.com/atlas/Documents/View?aid=97816&amp;Id=203852a4-b842-414a-ba3a-f8ab3fa682d3</EditDocumentURL>
+            <IsCheckedOut>false</IsCheckedOut>
+            <MIMEType>application/msword</MIMEType>
+            <PageCount>1</PageCount>
+        </Document>
+    </Documents>
+    <TemplateFieldData displayName="" displayValue="" mergedDocumentUid="203852a4-b842-414a-ba3a-f8ab3fa682d3">
+        <Contract_Manager_Information displayName="Contract Manager Information" displayValue="Contract Manager Information">
+            <Intake_Type key="Agreement">Agreement</Intake_Type>
+            <Contract_Title>This is a test Agreement</Contract_Title>
+            <SYS_Submitted_By_Name>Snigdha Boyed</SYS_Submitted_By_Name>
+            <SYS_Submitted_By_Email>Snigdha.Boyed@docusign.com</SYS_Submitted_By_Email>
+            <Internal_Signatory_Name>John Doe</Internal_Signatory_Name>
+            <Internal_Signatory_Email>John@doe.com</Internal_Signatory_Email>
+        </Contract_Manager_Information>
+        <Information displayName="Information" displayValue="Information">
+            <Business_Area key="Suvig Boyed">Suvig Boyed</Business_Area>
+        </Information>
+        <Additional_Information displayName="Additional Information" displayValue="Additional Information">
+            <Spend_and_Expenses displayName="Spend and Expenses" displayValue="Spend and Expenses">
+                <Will_Fee_or_Expense_Associated key="Yes">Yes</Will_Fee_or_Expense_Associated>
+                <Is_this_for_Professional_Services key="Yes">Yes</Is_this_for_Professional_Services>
+                <Estimated_Cost_Spend_Associated>10000</Estimated_Cost_Spend_Associated>
+                <Will_Walmart_cover_any_travel_or_expenses key="No">No</Will_Walmart_cover_any_travel_or_expenses>
+                <AOP_Line_Item_Number>AOPLine1</AOP_Line_Item_Number>
+            </Spend_and_Expenses>
+        </Additional_Information>
+    </TemplateFieldData>
+</Params>

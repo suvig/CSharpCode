@@ -1,0 +1,152 @@
+<WFData>
+    <TemplateFieldData displayName="" displayValue="" uploadedDocumentUid="640b583f-98c9-419b-8c06-370e14ba51ee">
+        <Information displayName="Information" displayValue="Information">
+            <Brand key="Walmart">Walmart</Brand>
+            <Business_Area key="Consumer Health and Data Services">Consumer Health and Data Services</Business_Area>
+            <Counterparty_Name>Boyd Inc</Counterparty_Name>
+            <Counterparty_Type key="Primary">Primary</Counterparty_Type>
+            <Counterparty_Address>1</Counterparty_Address>
+            <Counterparty_Point_of_Contact_Name>1</Counterparty_Point_of_Contact_Name>
+            <Counterparty_Point_of_Contact_Email>s@b.com</Counterparty_Point_of_Contact_Email>
+            <Counterparty_Signatory_Name>1</Counterparty_Signatory_Name>
+            <Counterparty_Signatory_Email>c@b.com</Counterparty_Signatory_Email>
+        </Information>
+        <Additional_Information displayName="Additional Information" displayValue="Additional Information">
+            <What_is_the_purpose_of_this_contract displayName="What is the purpose of this contract?" displayValue="What is the purpose of this contract?">
+                <Contract_Description><![CDATA[<html><head><meta charset='UTF-8'></head><body><p>11</p></body></html>]]></Contract_Description>
+            </What_is_the_purpose_of_this_contract>
+            <Spend_and_Expenses displayName="Spend and Expenses" displayValue="Spend and Expenses">
+                <Will_Fee_or_Expense_Associated key="No">No</Will_Fee_or_Expense_Associated>
+            </Spend_and_Expenses>
+            <Data_Questionnaire displayName="Data Questionnaire" displayValue="Data Questionnaire">
+                <Does_the_contract_involve_data key="No">No</Does_the_contract_involve_data>
+            </Data_Questionnaire>
+            <Artificial_Intelligence_Questionnaire displayName="Artificial Intelligence Questionnaire" displayValue="Artificial Intelligence Questionnaire">
+                <AI_Guidance><![CDATA[<html><head><meta charset='UTF-8'></head><body><p></p><p>If the artificial intelligence is limited to both: (i) the processing of non-sensitive data through an enterprise Generative AI tool (ex., ChatGPT or MS Copilot) to summarize or organize the non-sensitive data; and (ii) the data is not used for model training and no data storage longer then the question can be answered “no”. Sensitive data in this context refers to:</p> <ol><li>Healthcare & Walmart Benefits Data (e.g., HIPAA-regulated data, patient safety info)</li><li>Trade Secrets & Third-Party IP (e.g., trademarks, copyrighted content, confidential information)</li><li>Regulated Data (e.g., attorney-client communications, non-public financials)</li><li>PCI & SOX Data (e.g., credit card info, SOX-regulated financials)</li><li>Sensitive Demographic Data (e.g., race, gender, religion, political views, precise location)</li><li>Biometric Data (e.g., fingerprints, facial geometry, voiceprints, DNA, retina scans).</li></ol></body></html>]]></AI_Guidance>
+                <Is_AI_ML_Involved key="No">No</Is_AI_ML_Involved>
+            </Artificial_Intelligence_Questionnaire>
+            <Is_this_a_new_contract_or_is_this_an_amendment_to_an_existing_contract displayName="Is this a new contract or is this an amendment to an existing contract?" displayValue="Is this a new contract or is this an amendment to an existing contract?">
+                <Is_Request_Related key="No">No</Is_Request_Related>
+            </Is_this_a_new_contract_or_is_this_an_amendment_to_an_existing_contract>
+        </Additional_Information>
+        <Upload_Documents displayName="Upload Documents" displayValue="Upload Documents">
+            <Active_Documents_Attachments displayName="Review Documents" />
+            <Reference_Documents_Attachments displayName="Supplemental Documents" />
+        </Upload_Documents>
+        <System displayName="System" displayValue="System">
+            <Form_Type>Upload</Form_Type>
+            <Originally_Started_From>CLM</Originally_Started_From>
+            <Common displayName="Common" displayValue="Common">
+                <SYS_CLM_AccountName>Walmart</SYS_CLM_AccountName>
+                <SYS_App_Name>HW</SYS_App_Name>
+                <SYS_App_Version>v1</SYS_App_Version>
+                <SYS_Common_Version_Number>1</SYS_Common_Version_Number>
+                <SYS_Agreement_Number />
+                <SYS_Account_Id />
+                <SYS_Account_Name />
+                <SYS_Account_Folder_Id />
+                <SYS_Account_Unique_Name />
+                <SYS_AccountLink />
+                <SYS_ApproversEmail />
+                <SYS_ApproversName />
+                <SYS_Business_Area>Consumer Health and Data Services</SYS_Business_Area>
+                <SYS_Business_Area_Sanitized>Consumer Health and Data Services</SYS_Business_Area_Sanitized>
+                <SYS_Counterparty_Name>Boyd Inc</SYS_Counterparty_Name>
+                <SYS_Counterparty_Name_Sanitized>Boyd Inc</SYS_Counterparty_Name_Sanitized>
+                <SYS_Contract_Title />
+                <SYS_Contract_Title_Sanitized />
+                <SYS_Contract_Number />
+                <SYS_Main_DocID>640b583f-98c9-419b-8c06-370e14ba51ee</SYS_Main_DocID>
+                <SYS_DisplayName_Previous />
+                <SYS_DocIDs>640b583f-98c9-419b-8c06-370e14ba51ee||09e4b63e-030b-4d14-9a44-6697d42afb19|19e4f37b-34da-48f2-936a-79d4d75974bd|08e37f02-0dcb-482c-8f4f-33059d126929</SYS_DocIDs>
+                <SYS_DocIDs_ExternalReview>640b583f-98c9-419b-8c06-370e14ba51ee|</SYS_DocIDs_ExternalReview>
+                <SYS_DocIDs_NonExternalReview>09e4b63e-030b-4d14-9a44-6697d42afb19|19e4f37b-34da-48f2-936a-79d4d75974bd|08e37f02-0dcb-482c-8f4f-33059d126929</SYS_DocIDs_NonExternalReview>
+                <SYS_DocIDs_Signature>640b583f-98c9-419b-8c06-370e14ba51ee||09e4b63e-030b-4d14-9a44-6697d42afb19|19e4f37b-34da-48f2-936a-79d4d75974bd</SYS_DocIDs_Signature>
+                <SYS_DocID_SupportingDoc>09e4b63e-030b-4d14-9a44-6697d42afb19|08e37f02-0dcb-482c-8f4f-33059d126929</SYS_DocID_SupportingDoc>
+                <SYS_DocID_LegalCoverLetter>19e4f37b-34da-48f2-936a-79d4d75974bd</SYS_DocID_LegalCoverLetter>
+                <SYS_DocID_IntakeForm>08e37f02-0dcb-482c-8f4f-33059d126929</SYS_DocID_IntakeForm>
+                <SYS_Document_Type />
+                <SYS_GrandParentFolder_Id />
+                <SYS_Init_Workflow_Id>85a56adb-7312-f111-8bd9-9440c9836ed5</SYS_Init_Workflow_Id>
+                <SYS_InternalApprovalStatus />
+                <SYS_IsComplianceReviewed />
+                <SYS_Language />
+                <SYS_Legacy_ContractRequestNumber />
+                <SYS_LegalOps_TaskGroup_Name />
+                <SYS_LegalOps_User_Email />
+                <SYS_Main_Workflow_Id>0e1b56ed-7312-f111-8bd9-9440c9836ed5</SYS_Main_Workflow_Id>
+                <SYS_ObjectRecordType />
+                <SYS_Opportunity_CurrencyName />
+                <SYS_Opportunity_Id />
+                <SYS_Opportunity_Name />
+                <SYS_Opportunity_Folder_Id />
+                <SYS_Opportuinty_Unique_Name />
+                <SYS_OpportunityLink />
+                <SYS_OpportunityOwner_ID />
+                <SYS_OpportunityOwner_Email />
+                <SYS_OpportunityOwner_Name />
+                <SYS_Opportunity_StageName />
+                <SYS_ParentFolder_Id>cd2a9ae1-7312-f111-b777-88e9a4bd2dee</SYS_ParentFolder_Id>
+                <SYS_ParentFolderLink>https://uatna11.springcm.com/atlas/Documents/BrowseDocuments.aspx?aid=97816&amp;fUid=cd2a9ae1-7312-f111-b777-88e9a4bd2dee</SYS_ParentFolderLink>
+                <SYS_Pre_Approver_Task_Group />
+                <SYS_Route>Validate Input Data</SYS_Route>
+                <SYS_Route_Previous>Send back to Intake</SYS_Route_Previous>
+                <SYS_Route_Selected_eSign />
+                <SYS_Signature_Date />
+                <SYS_Simulation />
+                <SYS_StepStatus_Edit />
+                <SYS_StepStatus_Approve />
+                <SYS_StepStatus_ExternalReview />
+                <SYS_StepStatus_Signature />
+                <SYS_Submitted_By_Email>Suvig.Boyed@docusign.com</SYS_Submitted_By_Email>
+                <SYS_Submitted_By_Name>Suvig Boyed</SYS_Submitted_By_Name>
+                <SYS_User_ContractSpecialist>Mai.Ahmed@docusign.com</SYS_User_ContractSpecialist>
+                <SYS_User_Previous>Suvig.Boyed@docusign.com</SYS_User_Previous>
+                <SYS_User_Legal_Officer />
+                <SYS_User_SpecficReviewer />
+                <SYS_User_Hub />
+                <SYS_Workflow_Id>WF-000146</SYS_Workflow_Id>
+                <SYS_Workflow_Identifier>WF-000146 | Boyd Inc | Consumer Health and Data Services | Suvig.Boyed@docusign.com</SYS_Workflow_Identifier>
+                <SYS_WFData_Version />
+                <SYS_WFData_DocId />
+                <Selected_Route>
+                    <SYS_Selected_Route_RoutingSelectionNote>Validate Input Data</SYS_Selected_Route_RoutingSelectionNote>
+                    <SYS_Selected_Route_Condition>boolean( //SYS_Route='Validate Input Data' )</SYS_Selected_Route_Condition>
+                    <SYS_Selected_Route_Options />
+                    <SYS_Selected_Route_DisplayName>Validate Input Data</SYS_Selected_Route_DisplayName>
+                    <SYS_Selected_Route_StageName>Review Intake</SYS_Selected_Route_StageName>
+                    <SYS_Selected_Route_TaskUser>Suvig.Boyed@docusign.com</SYS_Selected_Route_TaskUser>
+                    <SYS_Selected_Route_TaskGroup />
+                    <SYS_Selected_Route_StepType>Create or Upload Doc</SYS_Selected_Route_StepType>
+                    <SYS_Selected_Route_LinktoNextTask>NA</SYS_Selected_Route_LinktoNextTask>
+                    <SYS_Selected_Route_EmailBody>NA</SYS_Selected_Route_EmailBody>
+                    <SYS_Selected_Route_Instructions>NA</SYS_Selected_Route_Instructions>
+                    <SYS_Selected_Route_Notes />
+                </Selected_Route>
+            </Common>
+        </System>
+    </TemplateFieldData>
+    <SelectedTemplates>
+        <SelectedTemplate>
+            <SelectedTemplatePath>/_Admin/Apps/HW/Templates/HW Contract Summary.docx</SelectedTemplatePath>
+            <SelectedDocumentName>HW Contract Summary</SelectedDocumentName>
+            <SelectedDocIDNode>SYS_DocIDs|SYS_DocIDs_NonExternalReview|SYS_DocID_SupportingDoc</SelectedDocIDNode>
+            <SelectedDocumentType>Contract Summary</SelectedDocumentType>
+            <SelectedAction>Generate</SelectedAction>
+        </SelectedTemplate>
+        <SelectedTemplate>
+            <SelectedTemplatePath>/_Admin/Apps/HW/Templates/Legal Cover Letter.docx</SelectedTemplatePath>
+            <SelectedDocumentName>Legal Cover Letter</SelectedDocumentName>
+            <SelectedDocIDNode>SYS_DocIDs|SYS_DocIDs_NonExternalReview|SYS_DocID_LegalCoverLetter</SelectedDocIDNode>
+            <SelectedDocumentType>Cover Letter</SelectedDocumentType>
+            <SelectedAction>Generate</SelectedAction>
+        </SelectedTemplate>
+        <SelectedTemplate>
+            <SelectedTemplatePath>/_Admin/Apps/HW/Templates/Intake Form.docx</SelectedTemplatePath>
+            <SelectedDocumentName>Intake Form</SelectedDocumentName>
+            <SelectedDocIDNode>SYS_DocIDs|SYS_DocIDs_NonExternalReview|SYS_DocID_SupportingDoc|SYS_DocID_IntakeForm</SelectedDocIDNode>
+            <SelectedDocumentType>Intake Form</SelectedDocumentType>
+            <SelectedAction>Generate</SelectedAction>
+        </SelectedTemplate>
+    </SelectedTemplates>
+</WFData>
