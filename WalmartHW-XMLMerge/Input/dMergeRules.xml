@@ -2,9 +2,11 @@
     <Row>
         <Notes></Notes>
         <Condition>boolean( //SYS_Route='Validate Input Data' )</Condition>
-        <Action>Add</Action>
+        <Action>UpsertTree</Action>
         <SourceNode>//Contract_Manager_Information</SourceNode>
-        <TargetNode>//TemplateFieldData</TargetNode>
+        <TargetNode>//Contract_Manager_Information</TargetNode>
+        <TargetParent>//TemplateFieldData</TargetParent>
+        <InsertBefore>//TemplateFieldData/System</InsertBefore>
     </Row>
     <Row>
         <Notes></Notes>

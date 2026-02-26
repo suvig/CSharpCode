@@ -37,6 +37,14 @@
             <Active_Documents_Attachments displayName="Review Documents" />
             <Reference_Documents_Attachments displayName="Supplemental Documents" />
         </Upload_Documents>
+        <Contract_Manager_Information displayName="Contract Manager Information" displayValue="Contract Manager Information">
+            <Intake_Type key="Agreement">Agreement</Intake_Type>
+            <Contract_Title>This is a test Agreement</Contract_Title>
+            
+            
+            <Internal_Signatory_Name>John Doe</Internal_Signatory_Name>
+            <Internal_Signatory_Email>John@doe.com</Internal_Signatory_Email>
+        </Contract_Manager_Information>
         <System displayName="System" displayValue="System">
             <Form_Type>Upload</Form_Type>
             <Originally_Started_From>CLM</Originally_Started_From>
@@ -129,14 +137,7 @@
                 </Selected_Route>
             </Common>
         </System>
-    <Contract_Manager_Information displayName="Contract Manager Information" displayValue="Contract Manager Information">
-            <Intake_Type key="Agreement">Agreement</Intake_Type>
-            <Contract_Title>This is a test Agreement</Contract_Title>
-            
-            
-            <Internal_Signatory_Name>John Doe</Internal_Signatory_Name>
-            <Internal_Signatory_Email>John@doe.com</Internal_Signatory_Email>
-        </Contract_Manager_Information></TemplateFieldData>
+    </TemplateFieldData>
     <SelectedTemplates>
         <SelectedTemplate>
             <SelectedTemplatePath>/_Admin/Apps/HW/Templates/HW Contract Summary.docx</SelectedTemplatePath>

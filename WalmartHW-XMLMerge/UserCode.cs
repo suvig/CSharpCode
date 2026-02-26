@@ -86,6 +86,22 @@ internal static class UserCode
             return nodes[0];
         }
 
+        XmlNode SelectZeroOrOneOrError(XmlDocument doc, string xpath, string label)
+        {
+            if (string.IsNullOrWhiteSpace(xpath))
+                throw new Exception(label + " XPath is blank.");
+
+            XmlNodeList nodes = doc.SelectNodes(xpath);
+            int count = (nodes == null) ? 0 : nodes.Count;
+
+            if (count == 0) return null;
+
+            if (count > 1)
+                throw new Exception(label + " XPath matched " + count + " nodes (must be 0 or 1): " + xpath);
+
+            return nodes[0];
+        }
+
         // Split by delimiter (" and " / " or ") but ignore delimiters inside quotes.
         string[] SplitOutsideQuotes(string input, string delimiter)
         {
@@ -254,6 +270,46 @@ internal static class UserCode
 
                 XmlNode imported = targetDoc.ImportNode(src, true);
                 tgtParent.AppendChild(imported); // add to end
+            }
+            else if (action.Equals("UpsertTree", StringComparison.OrdinalIgnoreCase))
+            {
+                // Source missing -> skip
+                XmlNode src = SelectSingleOrError(sourceDoc, sourceXPath, "SourceNode", skipIfMissing: true);
+                if (src == null) continue;
+
+                XmlNode existing = SelectZeroOrOneOrError(targetDoc, targetXPath, "TargetNode");
+                XmlNode imported = targetDoc.ImportNode(src, true);
+
+                if (existing != null)
+                {
+                    XmlNode parent = existing.ParentNode;
+                    if (parent == null)
+                        throw new Exception("TargetNode has no parent; cannot UpsertTree replace.");
+
+                    parent.ReplaceChild(imported, existing);
+                }
+                else
+                {
+                    string targetParentXPath = GetRowValue(rule, "TargetParent");
+                    if (string.IsNullOrWhiteSpace(targetParentXPath))
+                        throw new Exception("UpsertTree insert requires TargetParent when TargetNode does not exist.");
+
+                    XmlNode tgtParent = SelectSingleOrError(targetDoc, targetParentXPath, "TargetParent", skipIfMissing: false);
+
+                    string insertBeforeXPath = GetRowValue(rule, "InsertBefore");
+                    if (!string.IsNullOrWhiteSpace(insertBeforeXPath))
+                    {
+                        XmlNode anchor = SelectSingleOrError(targetDoc, insertBeforeXPath, "InsertBefore", skipIfMissing: false);
+                        if (!ReferenceEquals(anchor.ParentNode, tgtParent))
+                            throw new Exception("InsertBefore node is not a child of TargetParent.");
+
+                        tgtParent.InsertBefore(imported, anchor);
+                    }
+                    else
+                    {
+                        tgtParent.AppendChild(imported);
+                    }
+                }
             }
             else if (action.Equals("ReplaceTree", StringComparison.OrdinalIgnoreCase))
             {
