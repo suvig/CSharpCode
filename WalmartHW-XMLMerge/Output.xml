@@ -44,8 +44,7 @@
             
             <Internal_Signatory_Name>John Doe</Internal_Signatory_Name>
             <Internal_Signatory_Email>John@doe.com</Internal_Signatory_Email>
-        </Contract_Manager_Information>
-        <System displayName="System" displayValue="System">
+        </Contract_Manager_Information><System displayName="System" displayValue="System">
             <Form_Type>Upload</Form_Type>
             <Originally_Started_From>CLM</Originally_Started_From>
             <Common displayName="Common" displayValue="Common">

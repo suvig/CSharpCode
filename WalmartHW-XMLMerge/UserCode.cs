@@ -1,4 +1,5 @@
 using System.Xml;
+using System.Xml.XPath;
 
 internal static class UserCode
 {
@@ -12,7 +13,7 @@ internal static class UserCode
 
         var mergeRulesPath = Path.Combine(inputDir, "dMergeRules.xml");
         var validationPath = Path.Combine(inputDir, "dDataValidation.xml");
-        var wfDataPath = Path.Combine(inputDir, "xWFData2.xml");
+        var wfDataPath = Path.Combine(inputDir, "xWFData.xml");
 
         Console.WriteLine($"Merge rules:      {mergeRulesPath}");
         Console.WriteLine($"Data validation:  {validationPath}");
@@ -102,139 +103,21 @@ internal static class UserCode
             return nodes[0];
         }
 
-        // Split by delimiter (" and " / " or ") but ignore delimiters inside quotes.
-        string[] SplitOutsideQuotes(string input, string delimiter)
-        {
-            if (input == null) return new string[0];
-            if (delimiter == null || delimiter.Length == 0) return new[] { input };
-
-            var parts = new System.Collections.Generic.List<string>();
-            int i = 0;
-            int start = 0;
-            char quote = '\0';
-
-            while (i < input.Length)
-            {
-                char c = input[i];
-
-                if (quote == '\0')
-                {
-                    if (c == '\'' || c == '"') quote = c;
-
-                    // delimiter match (case-insensitive)
-                    if (i + delimiter.Length <= input.Length &&
-                        string.Compare(input, i, delimiter, 0, delimiter.Length, StringComparison.OrdinalIgnoreCase) == 0)
-                    {
-                        parts.Add(input.Substring(start, i - start));
-                        i += delimiter.Length;
-                        start = i;
-                        continue;
-                    }
-                }
-                else
-                {
-                    if (c == quote) quote = '\0';
-                }
-
-                i++;
-            }
-
-            parts.Add(input.Substring(start));
-            return parts.ToArray();
-        }
-
-        string StripOuterBoolean(string condition)
-        {
-            if (condition == null) return "";
-            string c = condition.Trim();
-
-            // boolean( ... )
-            if (c.Length >= 8 && c.StartsWith("boolean(", StringComparison.OrdinalIgnoreCase) && c.EndsWith(")"))
-            {
-                return c.Substring(8, c.Length - 9).Trim();
-            }
-
-            return c;
-        }
-
-        string Unquote(string s)
-        {
-            if (string.IsNullOrWhiteSpace(s)) return "";
-            s = s.Trim();
-            if ((s.StartsWith("'") && s.EndsWith("'")) || (s.StartsWith("\"") && s.EndsWith("\"")))
-                return s.Substring(1, s.Length - 2);
-            return s;
-        }
-
-        // Evaluate a single predicate like:
-        //   //SYS_App_Name='HW'
-        //   //SYS_Route="Initial Route"
-        //   //SomeNode   (existence)
-        bool EvalAtom(string atom)
-        {
-            atom = (atom ?? "").Trim();
-            if (atom.Length == 0) return true;
-
-            // not(...)
-            if (atom.StartsWith("not(", StringComparison.OrdinalIgnoreCase) && atom.EndsWith(")"))
-            {
-                string inner = atom.Substring(4, atom.Length - 5).Trim();
-                return !EvalExpr(inner);
-            }
-
-            int eq = atom.IndexOf('=');
-            if (eq < 0)
-            {
-                // existence check (XPath boolean(node-set))
-                XmlNode n = targetDoc.SelectSingleNode(atom);
-                return n != null;
-            }
-
-            string left = atom.Substring(0, eq).Trim();
-            string right = atom.Substring(eq + 1).Trim();
-            string expected = Unquote(right);
-
-            XmlNode node = targetDoc.SelectSingleNode(left);
-            if (node == null) return false;
-
-            string actual = (node.InnerText ?? "").Trim();
-            return string.Equals(actual, expected, StringComparison.Ordinal);
-        }
-
-        // Evaluate expression supporting "and" / "or" (no nested parentheses except not(...))
-        bool EvalExpr(string expr)
-        {
-            expr = (expr ?? "").Trim();
-            if (expr.Length == 0) return true;
-
-            // OR has lower precedence than AND (typical)
-            string[] orParts = SplitOutsideQuotes(expr, " or ");
-            if (orParts.Length > 1)
-            {
-                for (int i = 0; i < orParts.Length; i++)
-                {
-                    if (EvalExpr(orParts[i])) return true;
-                }
-                return false;
-            }
-
-            string[] andParts = SplitOutsideQuotes(expr, " and ");
-            for (int i = 0; i < andParts.Length; i++)
-            {
-                if (!EvalAtom(andParts[i])) return false;
-            }
-            return true;
-        }
-
         bool EvaluateCondition(string condition)
         {
             if (string.IsNullOrWhiteSpace(condition)) return true;
-            string expr = StripOuterBoolean(condition);
+            var nav = targetDoc.CreateNavigator();
+            var expr = XPathExpression.Compile(condition.Trim());
+            var result = nav.Evaluate(expr);
 
-            // If someone passes a complex XPath expression, fail fast to avoid silent wrong merges.
-            // (You can remove this guard if you want to allow more.)
-            // We'll still allow: //X='Y', //X, not(...), AND/OR
-            return EvalExpr(expr);
+            return result switch
+            {
+                bool b => b,
+                XPathNodeIterator it => it.MoveNext(),
+                string s => !string.IsNullOrEmpty(s),
+                double d => d != 0,
+                _ => throw new Exception($"Unsupported XPath result type: {result?.GetType().FullName}")
+            };
         }
 
         // =====================
