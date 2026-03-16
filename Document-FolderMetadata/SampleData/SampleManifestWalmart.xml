@@ -19,7 +19,7 @@
   </Row>
   <Row>
     <Notes></Notes>
-    <Condition>boolean( //SYS_FolderType='CounterParty' )</Condition>
+    <Condition>boolean( //SYS_UpdateMetadataValueFor='CounterParty' )</Condition>
     <NameOfSourceVariable>xWFData</NameOfSourceVariable>
     <XmlSourcePath>Counterparty_Name</XmlSourcePath>
     <DefaultValue></DefaultValue>
@@ -36,7 +36,7 @@
   </Row>
   <Row>
     <Notes></Notes>
-    <Condition>boolean( //SYS_FolderType='Business Unit' )</Condition>
+    <Condition>boolean( //SYS_UpdateMetadataValueFor='Business Unit' )</Condition>
     <NameOfSourceVariable>xWFData</NameOfSourceVariable>
     <XmlSourcePath>Business_Area</XmlSourcePath>
     <DefaultValue></DefaultValue>
@@ -53,7 +53,7 @@
   </Row>
   <Row>
     <Notes></Notes>
-    <Condition>boolean( //SYS_FolderType='Agreement' )</Condition>
+    <Condition>boolean( //SYS_UpdateMetadataValueFor='Agreement' )</Condition>
     <NameOfSourceVariable>xWFData</NameOfSourceVariable>
     <XmlSourcePath>SYS_Workflow_Id</XmlSourcePath>
     <DefaultValue></DefaultValue>
@@ -70,7 +70,7 @@
   </Row>
   <Row>
     <Notes></Notes>
-    <Condition>boolean( //SYS_FolderType='Agreement' )</Condition>
+    <Condition>boolean( //SYS_UpdateMetadataValueFor='Agreement' )</Condition>
     <NameOfSourceVariable>xWFData</NameOfSourceVariable>
     <XmlSourcePath>SYS_Submitted_By_Email</XmlSourcePath>
     <DefaultValue></DefaultValue>
@@ -87,7 +87,7 @@
   </Row>
   <Row>
     <Notes></Notes>
-    <Condition>boolean( //SYS_FolderType='Agreement' )</Condition>
+    <Condition>boolean( //SYS_UpdateMetadataValueFor='Agreement' )</Condition>
     <NameOfSourceVariable>xWFData</NameOfSourceVariable>
     <XmlSourcePath>Brand</XmlSourcePath>
     <DefaultValue></DefaultValue>
@@ -104,7 +104,7 @@
   </Row>
   <Row>
     <Notes></Notes>
-    <Condition>boolean( //SYS_FolderType='Agreement' )</Condition>
+    <Condition>boolean( //SYS_UpdateMetadataValueFor='Agreement' )</Condition>
     <NameOfSourceVariable>xWFData</NameOfSourceVariable>
     <XmlSourcePath>Will_Fee_or_Expense_Associated</XmlSourcePath>
     <DefaultValue></DefaultValue>
@@ -121,7 +121,7 @@
   </Row>
   <Row>
     <Notes></Notes>
-    <Condition>boolean( //SYS_FolderType='Agreement' )</Condition>
+    <Condition>boolean( //SYS_UpdateMetadataValueFor='Agreement' )</Condition>
     <NameOfSourceVariable>xWFData</NameOfSourceVariable>
     <XmlSourcePath>SYS_Submitted_By_Name</XmlSourcePath>
     <DefaultValue></DefaultValue>
@@ -138,7 +138,7 @@
   </Row>
   <Row>
     <Notes></Notes>
-    <Condition>boolean( //SYS_FolderType='Agreement' )</Condition>
+    <Condition>boolean( //SYS_UpdateMetadataValueFor='Agreement' )</Condition>
     <NameOfSourceVariable>xWFData</NameOfSourceVariable>
     <XmlSourcePath>SYS_Workflow_Id</XmlSourcePath>
     <DefaultValue></DefaultValue>

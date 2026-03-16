@@ -20,6 +20,7 @@
 //                        TargetField (string, required, case and space sensitive): The name of the target field to create
 //                        SetName (string, required for fields that are part of the same set within a group): Used to identify manifest rows that belong together for repeating and non-repeating sets
 //                        IgnoreNull (bool, optional): default FALSE if not specified. When TRUE, will skip attempting to write rows where source is NULL. Note: if null value is in a group where other fields are written, field may still appear
+//                        Condition (string, optional): XPath boolean expression evaluated against xWFData. Row is skipped unless the expression returns TRUE.
 //                        Transformations (string, pipe delimited sets, colon delimited transformations): takes a found value and translates it to its corresponding transformed value. Format as 'Value1:Value2|ValueA:ValueB' where the comparison value is left of colon, transformed result is right of colon. Possibilities separated by pipe.
 //                        ValuesToIgnore (string, pipe delimited, case insensitive): If the source data contains any of the pipe separated words, it will be ignored/skipped
 //                        MustHaveKeywords (string, pipe delimited, case insensitive): If the source data does NOT contain any of the pipe separated words, it will be ignored/skipped.
@@ -30,6 +31,7 @@ using System.Diagnostics;
 using System;
 using System.Xml;
 using System.Dynamic;
+using System.Xml.XPath;
 
 class Program
 {
@@ -43,7 +45,7 @@ class Program
         // INITIAL SETUP to create variables and load manifest/source data
         // ---------------------------------------------------------
         // Create an index tracker and message variable for processed rows for debug/logging purposes
-        string minLevelToInclude = "0"; // Set the minimum debug level to include in output (0-4, 0 being most detailed, or NONE to disable logging entirely)
+        string minLevelToInclude = "NONE"; // Set the minimum debug level to include in output (0-4, 0 being most detailed, or NONE to disable logging entirely)
         string logMessage;
         string processedIndexes = "";     
         bool putMethod = false; // Determine if you want to use PUT method. If 'true', nothing is specified, or this line is commented out, PATCH will be used (this is the step default, so only need to specify PUT when desired).
@@ -75,6 +77,7 @@ class Program
         string colIsDecimal = "IsDecimal";
         string colSetName = "SetName";
         string colIgnoreNull = "IgnoreNull";
+        string colCondition = "Condition";
         string colTransformations = "Transformations";
         string colValuesToIgnore = "ValuesToIgnore";
         string colMustHaveKeywords = "MustHaveKeywords";
@@ -103,6 +106,32 @@ class Program
         XmlElement outerGroupNode = dataToWrite.CreateElement("MetadataGroups");
         writeRoot.AppendChild(outerGroupNode);
         dataToWrite.AppendChild(writeRoot);
+
+        // Load xWFData once for manifest Condition XPath evaluation
+        System.Xml.XmlDocument conditionSource = new System.Xml.XmlDocument();
+        System.Xml.XPath.XPathNavigator requestNavigator = null;
+        try
+        {
+                // =========================================================
+                // DATA LOADING BLOCK
+                // =========================================================
+                // --- LOCAL TESTING (Comment out for CLM USE) ---
+                string conditionSourceData = System.IO.File.ReadAllText("SampleData/xWFData.xml");
+
+                // --- CLM USE (Uncomment for CLM USE) ---
+                //string conditionSourceData = _context.XmlVariables["xWFData"].GetXmlNode("/*").OuterXml;
+                // =========================================================
+
+                conditionSource.LoadXml(conditionSourceData);
+                requestNavigator = conditionSource.CreateNavigator();
+                logMessage = "Loaded xWFData for manifest condition evaluation.";
+                WriteDebugLog(null, logMessage, null, false, 1);
+        }
+        catch (Exception ex)
+        {
+                logMessage = "----|***ERROR LOADING xWFData FOR CONDITION EVALUATION*** - " + ex.Message;
+                WriteDebugLog(null, logMessage, "Failed", false, 4);
+        }
 
         // Create a set tracking variable to prevent duplicate processing of any Set type rows (since those in a set need to be processed together)
         string processedSetNames = "";
@@ -143,6 +172,14 @@ class Program
                         logMessage = "Row already processed, skipping.";
                         WriteDebugLog(null, logMessage, "Already Processed", false, 1);
                         continue; // Skip to next iteration
+                }
+
+                if (!EvaluateManifestCondition(currentRowNode))
+                {
+                        logMessage = "Skipping row because manifest condition evaluated to FALSE.";
+                        WriteDebugLog(null, logMessage, "Skipped", false, 2);
+                        MarkRowProcessed(currentRowNode);
+                        continue;
                 }
 
                 // Handle the source as an XML Variable
@@ -326,6 +363,20 @@ class Program
                                 // Iterate through each row in the set group
                                 foreach (XmlNode groupRow in matchingRows){
                                         int foundItemCount = 0;
+
+                                        if (processedIndexes.Contains(GetRowIndexNumber(groupRow))){
+                                                logMessage = "Set row already processed, skipping.";
+                                                WriteDebugLog(null, logMessage, "Already Processed", false, 1);
+                                                continue;
+                                        }
+
+                                        if (!EvaluateManifestCondition(groupRow))
+                                        {
+                                                logMessage = "Skipping set row because manifest condition evaluated to FALSE.";
+                                                WriteDebugLog(null, logMessage, "Skipped", false, 2);
+                                                MarkRowProcessed(groupRow);
+                                                continue;
+                                        }
 
                                         // Find all nodes in source data that match the current row's SourcePath and make a list out of it since it is possibly a set
                                         string currentSourcePath = groupRow.SelectSingleNode(colXmlSourcePath).InnerText;
@@ -561,6 +612,60 @@ class Program
                         }
                 }
                 return index.ToString();
+        }
+
+        // ---------------------------------------------------------
+        // Helper Function to mark a row as processed
+        // ---------------------------------------------------------
+        void MarkRowProcessed(XmlNode rowToMark)
+        {
+                string rowIndex = GetRowIndexNumber(rowToMark);
+                if (!processedIndexes.Contains(rowIndex))
+                {
+                        processedIndexes += rowIndex + "|";
+                }
+        }
+
+        // ---------------------------------------------------------
+        // Helper Function to evaluate manifest row condition against xWFData
+        // ---------------------------------------------------------
+        bool EvaluateManifestCondition(XmlNode manifestRow)
+        {
+                string condition = manifestRow.SelectSingleNode(colCondition)?.InnerText?.Trim();
+
+                if (string.IsNullOrEmpty(condition))
+                {
+                        return true;
+                }
+
+                if (requestNavigator == null)
+                {
+                        logMessage = "Condition evaluator is unavailable. Skipping row. Condition: " + condition;
+                        WriteDebugLog(null, logMessage, null, false, 3);
+                        return false;
+                }
+
+                try
+                {
+                        System.Xml.XPath.XPathExpression expression = System.Xml.XPath.XPathExpression.Compile(condition);
+                        if (expression.ReturnType != System.Xml.XPath.XPathResultType.Boolean)
+                        {
+                                logMessage = "Manifest condition must return a boolean. Skipping row. Condition: " + condition;
+                                WriteDebugLog(null, logMessage, null, false, 3);
+                                return false;
+                        }
+
+                        bool conditionPassed = (bool)requestNavigator.Evaluate(expression);
+                        logMessage = "Manifest condition evaluated to " + (conditionPassed ? "TRUE" : "FALSE") + ": " + condition;
+                        WriteDebugLog(null, logMessage, null, false, 1);
+                        return conditionPassed;
+                }
+                catch (Exception ex)
+                {
+                        logMessage = "***ERROR EVALUATING MANIFEST CONDITION*** - " + ex.Message + " | Condition: " + condition;
+                        WriteDebugLog(null, logMessage, null, false, 4);
+                        return false;
+                }
         }
 
         // ---------------------------------------------------------
