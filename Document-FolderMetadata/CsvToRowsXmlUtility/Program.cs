@@ -9,7 +9,7 @@ internal static class Program
         try
         {
             string projectRoot = ResolveProjectRoot();
-            string defaultInputPath = Path.Combine(projectRoot, "SampleData", "SampleManifestWalmart.csv");
+            string defaultInputPath = Path.Combine(projectRoot, "SampleData", "Update Metadata Mapping.csv");
 
             string inputPath = args.Length > 0 && !string.IsNullOrWhiteSpace(args[0])
                 ? ResolvePath(args[0], projectRoot)
@@ -51,7 +51,7 @@ internal static class Program
 
     private static void PrintUsage(string projectRoot)
     {
-        string sampleInputPath = Path.Combine(projectRoot, "SampleData", "SampleManifestWalmart.csv");
+        string sampleInputPath = Path.Combine(projectRoot, "SampleData", "Update Metadata Mapping.csv");
         Console.WriteLine("Usage:");
         Console.WriteLine("  dotnet run --project Document-FolderMetadata/CsvToRowsXmlUtility.csproj [inputCsvPath] [outputXmlPath]");
         Console.WriteLine();

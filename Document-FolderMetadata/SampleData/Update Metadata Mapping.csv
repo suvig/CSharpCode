@@ -1,0 +1,10 @@
+﻿Notes,Condition,NameOfSourceVariable,XmlSourcePath,DefaultValue,TargetGroup,TargetField,SetName,IsDate,IsNumber,IsDecimal,IgnoreNull,Transformations,ValuesToIgnore,MustHaveKeywords
+For Counterparty Name Folder,boolean( //SYS_MetadataTarget='CounterParty' ),xWFData,Counterparty_Name,,HW Parent Folder,Counterparty,,,,,,,,
+For Business Unit Folder,boolean( //SYS_MetadataTarget='Business Unit' ),xWFData,Business_Area,,HW Parent Folder,Business Area,,,,,,,,
+For Agreement Folder,boolean( //SYS_MetadataTarget='Agreement' ),xWFData,SYS_Workflow_Id,,HW WF Folder,Workflow ID,,,,,,,,
+For Agreement Folder,boolean( //SYS_MetadataTarget='Agreement' ),xWFData,SYS_Submitted_By_Email,,HW WF Folder,Contract Negotiator Email,,,,,,,,
+For Agreement Folder,boolean( //SYS_MetadataTarget='Agreement' ),xWFData,Brand,,HW Agreement,Brand,,,,,,,,
+For Agreement Folder,boolean( //SYS_MetadataTarget='Agreement' ),xWFData,Will_Fee_or_Expense_Associated,,HW Agreement,Sales or Spend,,,,,,,,
+For Agreement Folder,boolean( //SYS_MetadataTarget='Agreement' ),xWFData,SYS_Submitted_By_Name,,HW Agreement,Contract Negotiator,,,,,,,,
+For Agreement Folder,boolean( //SYS_MetadataTarget='Agreement' ),xWFData,SYS_Workflow_Id,,HW Agreement,Contract ID,,,,,,,,
+For Agreement Folder,boolean( //SYS_MetadataTarget='Agreement' ),,sCurrentDate,,HW Agreement,Date Received,,TRUE,,,,,,

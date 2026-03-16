@@ -108,7 +108,7 @@
         <SYS_FunctionalReviewStatus>In Progress</SYS_FunctionalReviewStatus>
         <SYS_FunctionalReviewInProgress>1</SYS_FunctionalReviewInProgress>
         <SYS_PR_userDropdown/>
-        <SYS_UpdateMetadataValueFor>Agreement</SYS_UpdateMetadataValueFor>
+        <SYS_MetadataTarget>Agreement</SYS_MetadataTarget>
         <Selected_Route>
           <SYS_Selected_Route_RoutingSelectionNote>Send to Contract Specialist</SYS_Selected_Route_RoutingSelectionNote>
           <SYS_Selected_Route_Condition>boolean( //SYS_Route='Send to Contract Specialist' )</SYS_Selected_Route_Condition>

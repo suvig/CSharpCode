@@ -37,9 +37,9 @@ class Program
 {
     static void Main()
     {
-        //IF USING IN CLM, REMOVE EVERTHING ABOVE THIS COMMENT LINE AND EVERYTHING BELOW THE LAST LINE OF THE FILE
-        //AND UNCOMMENT THE RETURN STATEMENT AT THE END OF THE FILE TO RETURN THE OUTPUT VARIABLE TO THE WORKFLOW
-        //ALSO ENSURE TO ADJUST THE DATA LOADING BLOCKS TO LOAD FROM CONTEXT VARIABLES RATHER THAN LOCAL FILES (Ctrl+F "DATA LOADING BLOCK" TO FIND THEM; There are 4)
+                //IF USING IN CLM, REMOVE EVERTHING ABOVE THIS COMMENT LINE AND EVERYTHING BELOW THE LAST LINE OF THE FILE
+                //AND UNCOMMENT THE RETURN STATEMENT AT THE END OF THE FILE TO RETURN THE OUTPUT VARIABLE TO THE WORKFLOW
+                //ALSO ENSURE TO ADJUST THE DATA LOADING BLOCKS TO LOAD FROM CONTEXT VARIABLES RATHER THAN LOCAL FILES (Ctrl+F "DATA LOADING BLOCK" TO FIND THEM; There are 4)
 
         // ---------------------------------------------------------
         // INITIAL SETUP to create variables and load manifest/source data
@@ -57,7 +57,7 @@ class Program
         // Column names are also identified here and pre set, but can be changed. They are case and space sensitive
         System.Xml.XmlDocument manifest = new System.Xml.XmlDocument();
         // ---!!!! LOCAL TESTING (Comment out for CLM USE) !!!!---
-        string manifestData = System.IO.File.ReadAllText("SampleData/SampleManifestWalmart.xml");//<---COMMENT ME OUT WHEN TESTING IN CLM!
+        string manifestData = System.IO.File.ReadAllText("SampleData/Update Metadata Mapping.xml");//<---COMMENT ME OUT WHEN TESTING IN CLM!
 
         // --- !!!!CLM USE (Uncomment for CLM USE) !!!!!---
         //string manifestData = "";
@@ -67,6 +67,7 @@ class Program
 
         // Set Column Header Names
         string colRowIterator = "Row";
+        string colCondition = "Condition";
         string colSourceVariableName = "NameOfSourceVariable";
         string colXmlSourcePath = "XmlSourcePath";
         string colDefaultValue = "DefaultValue";
@@ -77,7 +78,6 @@ class Program
         string colIsDecimal = "IsDecimal";
         string colSetName = "SetName";
         string colIgnoreNull = "IgnoreNull";
-        string colCondition = "Condition";
         string colTransformations = "Transformations";
         string colValuesToIgnore = "ValuesToIgnore";
         string colMustHaveKeywords = "MustHaveKeywords";
@@ -202,12 +202,10 @@ class Program
                                 /*
                                 if (_context.XmlVariables.ContainsKey(nameOfSourceVariable))
                                 {
-                                        // Use "/*" to get the root element efficiently
                                         sourceData = _context.XmlVariables[nameOfSourceVariable].GetXmlNode("/*").OuterXml;
                                 }
                                 else
                                 {
-                                        // Force an error we can catch if the variable doesn't exist
                                         throw new Exception($"Variable '{nameOfSourceVariable}' not found in Context.");
                                 }
                                 */
@@ -245,11 +243,10 @@ class Program
                                 string testStringData = System.IO.File.ReadAllText("SampleData/xWFData.xml");
                                 testStringXml.LoadXml(testStringData);
                                 sourceData = testStringXml.SelectSingleNode("//" + nameOfSourceVariable)?.InnerText;
-                                
 
                                 // --- CLM USE (Uncomment for CLM USE) ---
+                                // Replace GetVariableValue(...) below with your verified CLM string-variable accessor if your manifest uses simple string sources.
                                 // sourceData = GetVariableValue(nameOfSourceVariable);
-                                
                                 // =========================================================
 
                                 // Ensure we actually got data back
@@ -1100,7 +1097,7 @@ class Program
         // =========================================================
         // DATA LOADING BLOCK
         // =========================================================
-        // --- LOCAL TESTING (Comment out for CLM USE) ---
+                // --- LOCAL TESTING (Comment out for CLM USE) ---
         Console.WriteLine(dataToWrite.OuterXml);
         
         // Save to XML file in SampleData folder
@@ -1109,8 +1106,8 @@ class Program
         Console.WriteLine($"\nXML saved to: {outputPath}");
         
 
-        // --- CLM USE (Uncomment for CLM USE) ---
-        //return dataToWrite.OuterXml;
+                // --- CLM USE (Uncomment for CLM USE) ---
+                //return dataToWrite.OuterXml;
         
         // =========================================================
     }

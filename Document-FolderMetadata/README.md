@@ -7,14 +7,14 @@ Document-FolderMetadata local structure
 
 Required local files in SampleData
 
-- SampleManifestWalmart.csv: source manifest you maintain.
-- SampleManifestWalmart.xml: generated from the CSV with CsvToRowsXmlUtility.
+- Update Metadata Mapping.csv: source manifest you maintain.
+- Update Metadata Mapping.xml: generated from the CSV with CsvToRowsXmlUtility.
 - xWFData.xml: shared local source XML file used for both XML-path rows and simple-variable rows.
 
 Run order
 
 1. Generate the manifest XML:
-   dotnet run --project CsvToRowsXmlUtility.csproj -- SampleData/SampleManifestWalmart.csv SampleData/SampleManifestWalmart.xml
+   dotnet run --project CsvToRowsXmlUtility.csproj -- "SampleData/Update Metadata Mapping.csv" "SampleData/Update Metadata Mapping.xml"
 2. Add or update SampleData/xWFData.xml.
 3. Run the workflow script locally:
    dotnet run --project Document-FolderMetadata.Runner.csproj
