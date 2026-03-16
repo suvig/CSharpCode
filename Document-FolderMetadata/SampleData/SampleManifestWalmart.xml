@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Rows>
+  <Row>
+    <Notes></Notes>
+    <Condition>boolean( //SYS_Route='NOTES')</Condition>
+    <NameOfSourceVariable></NameOfSourceVariable>
+    <XmlSourcePath></XmlSourcePath>
+    <DefaultValue></DefaultValue>
+    <TargetGroup></TargetGroup>
+    <TargetField></TargetField>
+    <SetName></SetName>
+    <IsDate></IsDate>
+    <IsNumber></IsNumber>
+    <IsDecimal></IsDecimal>
+    <IgnoreNull></IgnoreNull>
+    <Transformations></Transformations>
+    <ValuesToIgnore></ValuesToIgnore>
+    <MustHaveKeywords></MustHaveKeywords>
+  </Row>
+  <Row>
+    <Notes></Notes>
+    <Condition>boolean( //SYS_FolderType='CounterParty' )</Condition>
+    <NameOfSourceVariable>xWFData</NameOfSourceVariable>
+    <XmlSourcePath>Counterparty_Name</XmlSourcePath>
+    <DefaultValue></DefaultValue>
+    <TargetGroup>HW Parent Folder</TargetGroup>
+    <TargetField>Counterparty</TargetField>
+    <SetName></SetName>
+    <IsDate></IsDate>
+    <IsNumber></IsNumber>
+    <IsDecimal></IsDecimal>
+    <IgnoreNull></IgnoreNull>
+    <Transformations></Transformations>
+    <ValuesToIgnore></ValuesToIgnore>
+    <MustHaveKeywords></MustHaveKeywords>
+  </Row>
+  <Row>
+    <Notes></Notes>
+    <Condition>boolean( //SYS_FolderType='Business Unit' )</Condition>
+    <NameOfSourceVariable>xWFData</NameOfSourceVariable>
+    <XmlSourcePath>Business_Area</XmlSourcePath>
+    <DefaultValue></DefaultValue>
+    <TargetGroup>HW Parent Folder</TargetGroup>
+    <TargetField>Business Area</TargetField>
+    <SetName></SetName>
+    <IsDate></IsDate>
+    <IsNumber></IsNumber>
+    <IsDecimal></IsDecimal>
+    <IgnoreNull></IgnoreNull>
+    <Transformations></Transformations>
+    <ValuesToIgnore></ValuesToIgnore>
+    <MustHaveKeywords></MustHaveKeywords>
+  </Row>
+  <Row>
+    <Notes></Notes>
+    <Condition>boolean( //SYS_FolderType='Agreement' )</Condition>
+    <NameOfSourceVariable>xWFData</NameOfSourceVariable>
+    <XmlSourcePath>SYS_Workflow_Id</XmlSourcePath>
+    <DefaultValue></DefaultValue>
+    <TargetGroup>HW WF Folder</TargetGroup>
+    <TargetField>Workflow ID</TargetField>
+    <SetName></SetName>
+    <IsDate></IsDate>
+    <IsNumber></IsNumber>
+    <IsDecimal></IsDecimal>
+    <IgnoreNull></IgnoreNull>
+    <Transformations></Transformations>
+    <ValuesToIgnore></ValuesToIgnore>
+    <MustHaveKeywords></MustHaveKeywords>
+  </Row>
+  <Row>
+    <Notes></Notes>
+    <Condition>boolean( //SYS_FolderType='Agreement' )</Condition>
+    <NameOfSourceVariable>xWFData</NameOfSourceVariable>
+    <XmlSourcePath>SYS_Submitted_By_Email</XmlSourcePath>
+    <DefaultValue></DefaultValue>
+    <TargetGroup>HW WF Folder</TargetGroup>
+    <TargetField>Contract Negotiator Email</TargetField>
+    <SetName></SetName>
+    <IsDate></IsDate>
+    <IsNumber></IsNumber>
+    <IsDecimal></IsDecimal>
+    <IgnoreNull></IgnoreNull>
+    <Transformations></Transformations>
+    <ValuesToIgnore></ValuesToIgnore>
+    <MustHaveKeywords></MustHaveKeywords>
+  </Row>
+  <Row>
+    <Notes></Notes>
+    <Condition>boolean( //SYS_FolderType='Agreement' )</Condition>
+    <NameOfSourceVariable>xWFData</NameOfSourceVariable>
+    <XmlSourcePath>Brand</XmlSourcePath>
+    <DefaultValue></DefaultValue>
+    <TargetGroup>HW Agreement</TargetGroup>
+    <TargetField>Brand</TargetField>
+    <SetName></SetName>
+    <IsDate></IsDate>
+    <IsNumber></IsNumber>
+    <IsDecimal></IsDecimal>
+    <IgnoreNull></IgnoreNull>
+    <Transformations></Transformations>
+    <ValuesToIgnore></ValuesToIgnore>
+    <MustHaveKeywords></MustHaveKeywords>
+  </Row>
+  <Row>
+    <Notes></Notes>
+    <Condition>boolean( //SYS_FolderType='Agreement' )</Condition>
+    <NameOfSourceVariable>xWFData</NameOfSourceVariable>
+    <XmlSourcePath>Will_Fee_or_Expense_Associated</XmlSourcePath>
+    <DefaultValue></DefaultValue>
+    <TargetGroup>HW Agreement</TargetGroup>
+    <TargetField>Sales or Spend</TargetField>
+    <SetName></SetName>
+    <IsDate></IsDate>
+    <IsNumber></IsNumber>
+    <IsDecimal></IsDecimal>
+    <IgnoreNull></IgnoreNull>
+    <Transformations></Transformations>
+    <ValuesToIgnore></ValuesToIgnore>
+    <MustHaveKeywords></MustHaveKeywords>
+  </Row>
+  <Row>
+    <Notes></Notes>
+    <Condition>boolean( //SYS_FolderType='Agreement' )</Condition>
+    <NameOfSourceVariable>xWFData</NameOfSourceVariable>
+    <XmlSourcePath>SYS_Submitted_By_Name</XmlSourcePath>
+    <DefaultValue></DefaultValue>
+    <TargetGroup>HW Agreement</TargetGroup>
+    <TargetField>Contract Negotiator</TargetField>
+    <SetName></SetName>
+    <IsDate></IsDate>
+    <IsNumber></IsNumber>
+    <IsDecimal></IsDecimal>
+    <IgnoreNull></IgnoreNull>
+    <Transformations></Transformations>
+    <ValuesToIgnore></ValuesToIgnore>
+    <MustHaveKeywords></MustHaveKeywords>
+  </Row>
+  <Row>
+    <Notes></Notes>
+    <Condition>boolean( //SYS_FolderType='Agreement' )</Condition>
+    <NameOfSourceVariable>xWFData</NameOfSourceVariable>
+    <XmlSourcePath>SYS_Workflow_Id</XmlSourcePath>
+    <DefaultValue></DefaultValue>
+    <TargetGroup>HW Agreement</TargetGroup>
+    <TargetField>Contract ID</TargetField>
+    <SetName></SetName>
+    <IsDate></IsDate>
+    <IsNumber></IsNumber>
+    <IsDecimal></IsDecimal>
+    <IgnoreNull></IgnoreNull>
+    <Transformations></Transformations>
+    <ValuesToIgnore></ValuesToIgnore>
+    <MustHaveKeywords></MustHaveKeywords>
+  </Row>
+</Rows>

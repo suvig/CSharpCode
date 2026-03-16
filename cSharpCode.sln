@@ -4,6 +4,10 @@ VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BSBSTN-BulkImport", "BSBSTN-BulkImport\BSBSTN-BulkImport.csproj", "{6AE49358-E945-267E-87F0-09DABF920710}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsvToRowsXmlUtility", "Document-FolderMetadata\CsvToRowsXmlUtility.csproj", "{3ED65833-A2EA-4C25-B9FC-0CD5D7F7AE4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Document-FolderMetadata.Runner", "Document-FolderMetadata\Document-FolderMetadata.Runner.csproj", "{E1E7A7A9-16EF-4C7E-B73F-B1938F908E2C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -14,6 +18,14 @@ Global
 		{6AE49358-E945-267E-87F0-09DABF920710}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AE49358-E945-267E-87F0-09DABF920710}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6AE49358-E945-267E-87F0-09DABF920710}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3ED65833-A2EA-4C25-B9FC-0CD5D7F7AE4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3ED65833-A2EA-4C25-B9FC-0CD5D7F7AE4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3ED65833-A2EA-4C25-B9FC-0CD5D7F7AE4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3ED65833-A2EA-4C25-B9FC-0CD5D7F7AE4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1E7A7A9-16EF-4C7E-B73F-B1938F908E2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1E7A7A9-16EF-4C7E-B73F-B1938F908E2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1E7A7A9-16EF-4C7E-B73F-B1938F908E2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1E7A7A9-16EF-4C7E-B73F-B1938F908E2C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

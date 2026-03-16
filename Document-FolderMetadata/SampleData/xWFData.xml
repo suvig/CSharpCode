@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<WFData>
+  <TemplateFieldData displayName="" displayValue="" mergedDocumentUid="7bf2f362-9036-4e7f-af76-7665de163e84">
+    <Information displayName="Information" displayValue="Information">
+      <Brand key="Walmart">Walmart</Brand>
+      <Business_Area key="Direct to Employer">Direct to Employer</Business_Area>
+      <Counterparty_Name>Test parallel &amp; Notify</Counterparty_Name>
+      <Counterparty_Type key="Primary">Primary</Counterparty_Type>
+      <Counterparty_Address>Test parallel &amp; Notify</Counterparty_Address>
+      <Counterparty_Point_of_Contact_Name>Test parallel &amp; Notify</Counterparty_Point_of_Contact_Name>
+      <Counterparty_Point_of_Contact_Email>test@enail.com</Counterparty_Point_of_Contact_Email>
+      <Counterparty_Signatory_Name/>
+      <Counterparty_Signatory_Email/>
+    </Information>
+    <Additional_Information displayName="Additional Information" displayValue="Additional Information">
+      <What_is_the_purpose_of_this_contract displayName="What is the purpose of this contract?" displayValue="What is the purpose of this contract?">
+        <Contract_Description><![CDATA[<html><head><meta charset='UTF-8'></head><body><p>Test parallel & Notify</p></body></html>]]></Contract_Description>
+      </What_is_the_purpose_of_this_contract>
+      <Spend_and_Expenses displayName="Spend and Expenses" displayValue="Spend and Expenses">
+        <Will_Fee_or_Expense_Associated key="No">No</Will_Fee_or_Expense_Associated>
+      </Spend_and_Expenses>
+      <Data_Questionnaire displayName="Data Questionnaire" displayValue="Data Questionnaire">
+        <Does_the_contract_involve_data key="No">No</Does_the_contract_involve_data>
+      </Data_Questionnaire>
+      <Artificial_Intelligence_Questionnaire displayName="Artificial Intelligence Questionnaire" displayValue="Artificial Intelligence Questionnaire">
+        <AI_Guidance><![CDATA[<html><head><meta charset='UTF-8'></head><body><p></p><p>If the artificial intelligence is limited to both: (i) the processing of non-sensitive data through an enterprise Generative AI tool (ex., ChatGPT or MS Copilot) to summarize or organize the non-sensitive data; and (ii) the data is not used for model training and no data storage longer then the question can be answered “no”. Sensitive data in this context refers to:</p> <ol><li>Healthcare & Walmart Benefits Data (e.g., HIPAA-regulated data, patient safety info)</li><li>Trade Secrets & Third-Party IP (e.g., trademarks, copyrighted content, confidential information)</li><li>Regulated Data (e.g., attorney-client communications, non-public financials)</li><li>PCI & SOX Data (e.g., credit card info, SOX-regulated financials)</li><li>Sensitive Demographic Data (e.g., race, gender, religion, political views, precise location)</li><li>Biometric Data (e.g., fingerprints, facial geometry, voiceprints, DNA, retina scans).</li></ol></body></html>]]></AI_Guidance>
+        <Is_AI_ML_Involved key="No">No</Is_AI_ML_Involved>
+      </Artificial_Intelligence_Questionnaire>
+      <Is_this_a_new_contract_or_is_this_an_amendment_to_an_existing_contract displayName="Is this a new contract or is this an amendment to an existing contract?" displayValue="Is this a new contract or is this an amendment to an existing contract?">
+        <Is_Request_Related key="No">No</Is_Request_Related>
+      </Is_this_a_new_contract_or_is_this_an_amendment_to_an_existing_contract>
+    </Additional_Information>
+    <Upload_Documents displayName="Upload Documents" displayValue="Upload Documents">
+      <Active_Documents_Attachments displayName="Review Documents"/>
+      <Reference_Documents_Attachments displayName="Supplemental Documents"/>
+    </Upload_Documents>
+    <System displayName="System" displayValue="System">
+      <Form_Type>Create</Form_Type>
+      <Preview_Document_Action>Keep</Preview_Document_Action>
+      <Originally_Started_From>CLM</Originally_Started_From>
+      <Common displayName="Common" displayValue="Common">
+        <SYS_CLM_AccountName>Walmart</SYS_CLM_AccountName>
+        <SYS_App_Name>HW</SYS_App_Name>
+        <SYS_App_Version>v1</SYS_App_Version>
+        <SYS_Common_Version_Number>1</SYS_Common_Version_Number>
+        <SYS_Agreement_Number>HW-000019</SYS_Agreement_Number>
+        <SYS_Account_Id/>
+        <SYS_Account_Name/>
+        <SYS_Account_Folder_Id/>
+        <SYS_Account_Unique_Name/>
+        <SYS_AccountLink/>
+        <SYS_ApproversEmail/>
+        <SYS_ApproversName/>
+        <SYS_Business_Area>Direct to Employer</SYS_Business_Area>
+        <SYS_Business_Area_Sanitized>Direct to Employer</SYS_Business_Area_Sanitized>
+        <SYS_Counterparty_Name>Test parallel &amp; Notify</SYS_Counterparty_Name>
+        <SYS_Counterparty_Name_Sanitized>Test parallel _ Notify</SYS_Counterparty_Name_Sanitized>
+        <SYS_Contract_Title/>
+        <SYS_Contract_Title_Sanitized/>
+        <SYS_Contract_Number/>
+        <SYS_Main_DocID>7bf2f362-9036-4e7f-af76-7665de163e84</SYS_Main_DocID>
+        <SYS_DisplayName_Previous/>
+        <SYS_DocIDs>7bf2f362-9036-4e7f-af76-7665de163e84||fdf75c66-917c-43f3-9ef0-f22f2beb9e5d</SYS_DocIDs>
+        <SYS_DocIDs_ExternalReview>7bf2f362-9036-4e7f-af76-7665de163e84|</SYS_DocIDs_ExternalReview>
+        <SYS_DocIDs_NonExternalReview>fdf75c66-917c-43f3-9ef0-f22f2beb9e5d</SYS_DocIDs_NonExternalReview>
+        <SYS_DocIDs_Signature/>
+        <SYS_DocID_ContractSummary/>
+        <SYS_DocID_SupportingDoc>fdf75c66-917c-43f3-9ef0-f22f2beb9e5d</SYS_DocID_SupportingDoc>
+        <SYS_DocID_LegalCoverLetter/>
+        <SYS_DocID_IntakeForm>fdf75c66-917c-43f3-9ef0-f22f2beb9e5d</SYS_DocID_IntakeForm>
+        <SYS_Document_Type/>
+        <SYS_GrandParentFolder_Id/>
+        <SYS_Init_Workflow_Id>31552d60-4352-4246-bd4e-40301fe2558d</SYS_Init_Workflow_Id>
+        <SYS_InternalApprovalStatus/>
+        <SYS_IsComplianceReviewed/>
+        <SYS_Language/>
+        <SYS_Legacy_ContractRequestNumber/>
+        <SYS_LegalOps_TaskGroup_Name/>
+        <SYS_LegalOps_User_Email/>
+        <SYS_Main_Workflow_Id>03b7baad-3e21-f111-8bd9-9440c9836ed5</SYS_Main_Workflow_Id>
+        <SYS_ObjectRecordType/>
+        <SYS_ParentFolder_Id>aff3a6a4-3e21-f111-84fc-88e9a4bd0d9c</SYS_ParentFolder_Id>
+        <SYS_ParentFolderLink>https://uatna11.springcm.com/atlas/Documents/BrowseDocuments.aspx?aid=97816&amp;fUid=aff3a6a4-3e21-f111-84fc-88e9a4bd0d9c</SYS_ParentFolderLink>
+        <SYS_Pre_Approver_Task_Group/>
+        <SYS_Route>Send to Contract Specialist</SYS_Route>
+        <SYS_Route_Previous>Send to Contract Specialist</SYS_Route_Previous>
+        <SYS_Route_Selected_eSign/>
+        <SYS_Signature_Date/>
+        <SYS_Simulation/>
+        <SYS_StepStatus_Edit/>
+        <SYS_StepStatus_Approve/>
+        <SYS_StepStatus_ExternalReview/>
+        <SYS_StepStatus_Signature/>
+        <SYS_Submitted_By_Email>Mai.Ahmed@docusign.com</SYS_Submitted_By_Email>
+        <SYS_Submitted_By_Name>Mai Ahmed</SYS_Submitted_By_Name>
+        <SYS_User_ContractSpecialist>suvig.boyed@docusign.com</SYS_User_ContractSpecialist>
+        <SYS_User_ContractSpecialist_Name>Suvig Boyed </SYS_User_ContractSpecialist_Name>
+        <SYS_User_Previous>Mai.Ahmed@docusign.com</SYS_User_Previous>
+        <SYS_User_Legal_Officer/>
+        <SYS_User_SpecficReviewer/>
+        <SYS_User_Hub/>
+        <SYS_Workflow_Id>WF-000184</SYS_Workflow_Id>
+        <SYS_Workflow_Status/>
+        <SYS_Workflow_Identifier>WF-000184 | Test parallel &amp; Notify | Direct to Employer | Mai.Ahmed@docusign.com</SYS_Workflow_Identifier>
+        <SYS_WFData_Version/>
+        <SYS_WFData_DocId/>
+        <SYS_TypeOfCommOpsReview/>
+        <SYS_FunctionalReviewStatus>In Progress</SYS_FunctionalReviewStatus>
+        <SYS_FunctionalReviewInProgress>1</SYS_FunctionalReviewInProgress>
+        <SYS_PR_userDropdown/>
+        <SYS_PR_comment/>
+        <Selected_Route>
+          <SYS_Selected_Route_RoutingSelectionNote>Send to Contract Specialist</SYS_Selected_Route_RoutingSelectionNote>
+          <SYS_Selected_Route_Condition>boolean( //SYS_Route='Send to Contract Specialist' )</SYS_Selected_Route_Condition>
+          <SYS_Selected_Route_Options>Waiting for Business Review,Send for Stakeholder Review,Send for External Party Review,Send back to Intake,Send for Stakeholder Approval,Prepare Legal Cover Letter and Contract Summary,Send for Signature,Put this Contract On Hold,Cancel Contract,Send for Post Signature Review,Add Additional Documents,Document Management</SYS_Selected_Route_Options>
+          <SYS_Selected_Route_DisplayName>Contract Specialist Review</SYS_Selected_Route_DisplayName>
+          <SYS_Selected_Route_StageName>Contracting Review</SYS_Selected_Route_StageName>
+          <SYS_Selected_Route_TaskUser>suvig.boyed@docusign.com</SYS_Selected_Route_TaskUser>
+          <SYS_Selected_Route_TaskGroup>HW Contract Specialist</SYS_Selected_Route_TaskGroup>
+          <SYS_Selected_Route_StepType>Routing with User + TaskGroup</SYS_Selected_Route_StepType>
+          <SYS_Selected_Route_LinktoNextTask>Send for Signature,Send for External Party Review,Add Additional Documents,Document Management,Send for Stakeholder Review</SYS_Selected_Route_LinktoNextTask>
+          <SYS_Selected_Route_EmailBody>Please review the document and take the neccessary steps. (EmailBody)</SYS_Selected_Route_EmailBody>
+          <SYS_Selected_Route_Instructions>Please review the document and take the neccessary steps</SYS_Selected_Route_Instructions>
+          <SYS_Selected_Route_Notes/>
+        </Selected_Route>
+        <SYS_Opportunity_CurrencyName/>
+        <SYS_Opportunity_Id/>
+        <SYS_Opportunity_Name/>
+        <SYS_Opportunity_Folder_Id/>
+        <SYS_Opportuinty_Unique_Name/>
+        <SYS_OpportunityLink/>
+        <SYS_OpportunityOwner_ID/>
+        <SYS_OpportunityOwner_Email/>
+        <SYS_OpportunityOwner_Name/>
+        <SYS_Opportunity_StageName/>
+      </Common>
+    </System>
+  </TemplateFieldData>
+  <SelectedTemplates>
+    <SelectedTemplate>
+      <SelectedTemplatePath>/_Admin/Apps/HW/Templates/Intake Form.docx</SelectedTemplatePath>
+      <SelectedDocumentName>Intake Form</SelectedDocumentName>
+      <SelectedDocIDNode>SYS_DocIDs|SYS_DocIDs_NonExternalReview|SYS_DocID_SupportingDoc|SYS_DocID_IntakeForm</SelectedDocIDNode>
+      <SelectedDocumentType>Intake Form</SelectedDocumentType>
+      <SelectedAction>Generate</SelectedAction>
+    </SelectedTemplate>
+  </SelectedTemplates>
+</WFData>
