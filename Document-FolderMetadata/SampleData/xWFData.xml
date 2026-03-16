@@ -108,7 +108,7 @@
         <SYS_FunctionalReviewStatus>In Progress</SYS_FunctionalReviewStatus>
         <SYS_FunctionalReviewInProgress>1</SYS_FunctionalReviewInProgress>
         <SYS_PR_userDropdown/>
-        <SYS_PR_comment/>
+        <SYS_FolderType>CounterParty</SYS_FolderType>
         <Selected_Route>
           <SYS_Selected_Route_RoutingSelectionNote>Send to Contract Specialist</SYS_Selected_Route_RoutingSelectionNote>
           <SYS_Selected_Route_Condition>boolean( //SYS_Route='Send to Contract Specialist' )</SYS_Selected_Route_Condition>
