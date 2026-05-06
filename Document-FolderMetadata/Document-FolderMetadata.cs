@@ -953,9 +953,10 @@ class Program
         }
         else if (isNonRepeatingSet)
         {
-                // May 6, 2026
-                // Non-repeating sets used to be found by SetNumber=0. During the product bug
-                // workaround we omit that set-level SetNumber, so also match the default Name.
+                // May 6, 2026: Product bug workaround.
+                // Non-repeating sets used to be found by SetNumber=0. We now omit that
+                // set-level SetNumber because Engineering confirmed Name is enough, so
+                // also match the default Name when reusing the non-repeating Set.
                 newSetNode = newGroupNode.SelectSingleNode(
                 "Set[Name/text()='Set' or SetNumber/text()='0']"
                 ) as XmlElement;
@@ -1012,14 +1013,20 @@ class Program
                 newFieldNode.AppendChild(newSetNameFieldNode);
         }
 
-        XmlElement newSetNumberFieldNode = newFieldNode.OwnerDocument.CreateElement("SetNumber");
-        newSetNumberFieldNode.InnerText = currentSetNumber.ToString();
-        newFieldNode.AppendChild(newSetNumberFieldNode);
+        // May 6, 2026: Engineering confirmed field-level SetNumber defaults to 0
+        // for non-repeating fields. Keep it only for repeating sets where 1, 2, etc. matter.
+        if (!isNonRepeatingSet)
+        {
+                XmlElement newSetNumberFieldNode = newFieldNode.OwnerDocument.CreateElement("SetNumber");
+                newSetNumberFieldNode.InnerText = currentSetNumber.ToString();
+                newFieldNode.AppendChild(newSetNumberFieldNode);
+        }
 
         newSetNode.AppendChild(newFieldNode);
 
         // 3. Ensure required SET-level metadata is LAST.
-        // Workaround for a product bug: non-repeating fields currently need a set-level Name.
+        // May 6, 2026: Workaround for a product bug. Non-repeating fields currently
+        // need a set-level Name even though Name should become optional after the service pack.
         // Remove this default "Set" value after the product bug is fixed.
         string setName = hasCurrentSetName ? currentSetName : "Set";
         XmlElement setNameElement = newSetNode.SelectSingleNode("Name") as XmlElement;
@@ -1037,8 +1044,9 @@ class Program
         XmlElement setNumberElement = newSetNode.SelectSingleNode("SetNumber") as XmlElement;
         if (isNonRepeatingSet)
         {
-                // Engineer guidance: the product bug only requires set-level Name.
-                // For non-repeating fields, do not emit outer <SetNumber>0</SetNumber>.
+                // May 6, 2026: Engineering confirmed the product bug only requires
+                // set-level Name. Do not emit outer <SetNumber>0</SetNumber> for
+                // non-repeating fields.
                 if (setNumberElement != null)
                 {
                         newSetNode.RemoveChild(setNumberElement);

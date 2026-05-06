@@ -8,13 +8,11 @@
           <Group>HW WF Folder</Group>
           <Field>Workflow ID</Field>
           <Value>WF-000224</Value>
-          <SetNumber>0</SetNumber>
         </Field>
         <Field>
           <Group>HW WF Folder</Group>
           <Field>Contract Negotiator Email</Field>
           <Value>Suvig.Boyed@docusign.com</Value>
-          <SetNumber>0</SetNumber>
         </Field>
         <Name>Set</Name>
       </Set>
@@ -26,25 +24,21 @@
           <Group>HW Agreement</Group>
           <Field>Brand</Field>
           <Value>Walmart</Value>
-          <SetNumber>0</SetNumber>
         </Field>
         <Field>
           <Group>HW Agreement</Group>
           <Field>Sales or Spend</Field>
           <Value>No</Value>
-          <SetNumber>0</SetNumber>
         </Field>
         <Field>
           <Group>HW Agreement</Group>
           <Field>Contract Negotiator</Field>
           <Value>Suvig Boyed</Value>
-          <SetNumber>0</SetNumber>
         </Field>
         <Field>
           <Group>HW Agreement</Group>
           <Field>Contract ID</Field>
           <Value>WF-000224</Value>
-          <SetNumber>0</SetNumber>
         </Field>
         <Name>Set</Name>
       </Set>
