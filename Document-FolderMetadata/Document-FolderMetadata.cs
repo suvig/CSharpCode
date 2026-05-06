@@ -931,77 +931,113 @@ class Program
         //----------------------------------------------------------
         // Helper Function to create the field set nodes
         //----------------------------------------------------------
-        //Create the <Set> node if it doesn't already exist, and add the set name and set number
-        void CreateFieldSet(XmlElement newGroupNode, int currentSetNumber,  string targetGroup, string targetField, string sourceNodeData, string currentSetName)
+        // Create the <Set> node if it doesn't already exist, and add the fields,
+        // then ensure Name and SetNumber are at the end of the <Set>
+        void CreateFieldSet(
+        XmlElement newGroupNode,
+        int currentSetNumber,
+        string targetGroup,
+        string targetField,
+        string sourceNodeData,
+        string currentSetName)
         {
-                XmlElement newSetNode = null;
-                if (currentSetName != null){
-                        newSetNode = newGroupNode.SelectSingleNode("Set[Name/text()='" + currentSetName + "' and SetNumber/text()='" + currentSetNumber.ToString() + "']") as XmlElement;
-                }
-                else{
-                        newSetNode = newGroupNode.SelectSingleNode("Set[SetNumber/text()='" + currentSetNumber.ToString() + "']") as XmlElement;
-                }
-                if (newSetNode == null)
-                {
-                        newSetNode = newGroupNode.OwnerDocument.CreateElement("Set");
+        // 1. Find or create the <Set> for this group + set number
+        XmlElement newSetNode = null;
 
-                        // Check to see if there is a SetName before creating the node (non repeating fields will not have one)
-                        if (!string.IsNullOrEmpty(currentSetName)){
-                                XmlElement newSetNameNode = newSetNode.OwnerDocument.CreateElement("Name");
-                                newSetNameNode.InnerText = currentSetName;
-                                newSetNode.AppendChild(newSetNameNode);
+        if (!string.IsNullOrEmpty(currentSetName))
+        {
+                newSetNode = newGroupNode.SelectSingleNode(
+                "Set[Name/text()='" + currentSetName + "' and SetNumber/text()='" + currentSetNumber.ToString() + "']") as XmlElement;
+        }
+        else
+        {
+                newSetNode = newGroupNode.SelectSingleNode(
+                "Set[SetNumber/text()='" + currentSetNumber.ToString() + "']"
+                ) as XmlElement;
+        }
 
-                                // Log that we created the set node
-                                logMessage = "----|CREATED new SetName Node for SetName: " + currentSetName;
-                                WriteDebugLog(null, logMessage, null, false, 1);
-                        }
-
-                        //Create the set number node (which will be "0" if non repeating)
-                        XmlElement newSetNumberNode = newSetNode.OwnerDocument.CreateElement("SetNumber");
-                        newSetNumberNode.InnerText = currentSetNumber.ToString();
-                        newSetNode.AppendChild(newSetNumberNode);
-
-                        // Log that we created the set node
-                        logMessage = "----|CREATED new SetNumber node for Set Number: " + currentSetNumber.ToString();
-                        WriteDebugLog(null, logMessage, null, false, 1);
-                }
-                else{
-                        // Log that the set node already exists
-                        logMessage = "----|Set Node for SetName: " + currentSetName + " and SetNumber: " + currentSetNumber.ToString() + " ALREADY EXISTS in target XML. Using that.";
-                        WriteDebugLog(null, logMessage, null, false, 1);
-                }
-                //If this group isn't already appended to the outerGroupNode, do so now
-                if (newSetNode.ParentNode == null)
-                {
-                        newGroupNode.AppendChild(newSetNode);
-                }
-                
-
-                // Then create the <Field> to append to the set group by adding the Group, Field Name, Value, and Set Number information
-                XmlElement newFieldNode = newSetNode.OwnerDocument.CreateElement("Field");
-                XmlElement newFieldNameNode = newFieldNode.OwnerDocument.CreateElement("Field");
-                newFieldNameNode.InnerText = targetField;
-                newFieldNode.AppendChild(newFieldNameNode);
-                XmlElement GroupNameNode = newFieldNode.OwnerDocument.CreateElement("Group");
-                GroupNameNode.InnerText = targetGroup;
-                newFieldNode.AppendChild(GroupNameNode);
-                XmlElement newFieldValueNode = newFieldNode.OwnerDocument.CreateElement("Value");
-                newFieldValueNode.InnerText = sourceNodeData;
-                newFieldNode.AppendChild(newFieldValueNode);
-                if(!String.IsNullOrEmpty(currentSetName)){
-                        XmlElement newSetNameFieldNode = newFieldNode.OwnerDocument.CreateElement("SetName");
-                        newSetNameFieldNode.InnerText = currentSetName;
-                        newFieldNode.AppendChild(newSetNameFieldNode);
-                }
-                XmlElement newSetNumberFieldNode = newFieldNode.OwnerDocument.CreateElement("SetNumber");
-                newSetNumberFieldNode.InnerText = currentSetNumber.ToString();
-                newFieldNode.AppendChild(newSetNumberFieldNode);
-                newSetNode.AppendChild(newFieldNode);                                             
+        if (newSetNode == null)
+        {
+                newSetNode = newGroupNode.OwnerDocument.CreateElement("Set");
                 newGroupNode.AppendChild(newSetNode);
 
-                // Log that we created the field node
-                logMessage = "----|Created new Field Set Node for: " + targetField;
+                logMessage = "----|CREATED new Set node for SetName: " + currentSetName
+                        + " and SetNumber: " + currentSetNumber.ToString();
                 WriteDebugLog(null, logMessage, null, false, 1);
+        }
+        else
+        {
+                logMessage = "----|Set Node for SetName: " + currentSetName
+                        + " and SetNumber: " + currentSetNumber.ToString()
+                        + " ALREADY EXISTS in target XML. Using that.";
+                WriteDebugLog(null, logMessage, null, false, 1);
+        }
+
+        if (newSetNode.ParentNode == null)
+        {
+                newGroupNode.AppendChild(newSetNode);
+        }
+
+        // 2. Create the <Field> element and append in the required order:
+        //    Group -> Field -> Value -> (SetName) -> SetNumber
+        XmlElement newFieldNode = newSetNode.OwnerDocument.CreateElement("Field");
+
+        XmlElement groupNameNode = newFieldNode.OwnerDocument.CreateElement("Group");
+        groupNameNode.InnerText = targetGroup;
+        newFieldNode.AppendChild(groupNameNode);
+
+        XmlElement newFieldNameNode = newFieldNode.OwnerDocument.CreateElement("Field");
+        newFieldNameNode.InnerText = targetField;
+        newFieldNode.AppendChild(newFieldNameNode);
+
+        XmlElement newFieldValueNode = newFieldNode.OwnerDocument.CreateElement("Value");
+        newFieldValueNode.InnerText = sourceNodeData;
+        newFieldNode.AppendChild(newFieldValueNode);
+
+        if (!string.IsNullOrEmpty(currentSetName))
+        {
+                XmlElement newSetNameFieldNode = newFieldNode.OwnerDocument.CreateElement("SetName");
+                newSetNameFieldNode.InnerText = currentSetName;
+                newFieldNode.AppendChild(newSetNameFieldNode);
+        }
+
+        XmlElement newSetNumberFieldNode = newFieldNode.OwnerDocument.CreateElement("SetNumber");
+        newSetNumberFieldNode.InnerText = currentSetNumber.ToString();
+        newFieldNode.AppendChild(newSetNumberFieldNode);
+
+        newSetNode.AppendChild(newFieldNode);
+
+        // 3. Ensure <Name> and <SetNumber> at SET level exist and are LAST.
+        // Workaround for a product bug: non-repeating fields currently need a set-level Name.
+        // Remove this default "Set" value after the product bug is fixed.
+        string setName = !string.IsNullOrEmpty(currentSetName) ? currentSetName : "Set";
+        XmlElement setNameElement = newSetNode.SelectSingleNode("Name") as XmlElement;
+        if (setNameElement == null)
+        {
+                setNameElement = newSetNode.OwnerDocument.CreateElement("Name");
+        }
+        else
+        {
+                newSetNode.RemoveChild(setNameElement);
+        }
+        setNameElement.InnerText = setName;
+        newSetNode.AppendChild(setNameElement);
+
+        XmlElement setNumberElement = newSetNode.SelectSingleNode("SetNumber") as XmlElement;
+        if (setNumberElement == null)
+        {
+                setNumberElement = newSetNode.OwnerDocument.CreateElement("SetNumber");
+        }
+        else
+        {
+                newSetNode.RemoveChild(setNumberElement);
+        }
+        setNumberElement.InnerText = currentSetNumber.ToString();
+        newSetNode.AppendChild(setNumberElement);
+
+        // 4. Log
+        logMessage = "----|Created/updated Field Set Node for: " + targetField;
+        WriteDebugLog(null, logMessage, null, false, 1);
         }
          
         // ---------------------------------------------------------

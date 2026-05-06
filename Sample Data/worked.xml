@@ -1,5 +1,5 @@
-<UpdateMetadata UpdateType="Patch">
-  <DebugLog />
+<?xml version=""1.0""?>
+<UpdateMetadata UpdateType=""Patch"">
   <MetadataGroups>
     <MetadataGroup>
       <Name>HW WF Folder</Name>
@@ -7,13 +7,13 @@
         <Field>
           <Group>HW WF Folder</Group>
           <Field>Workflow ID</Field>
-          <Value>WF-000224</Value>
+          <Value>WF-000269</Value>
           <SetNumber>0</SetNumber>
         </Field>
         <Field>
           <Group>HW WF Folder</Group>
           <Field>Contract Negotiator Email</Field>
-          <Value>Suvig.Boyed@docusign.com</Value>
+          <Value>Mai.Ahmed@docusign.com</Value>
           <SetNumber>0</SetNumber>
         </Field>
         <Name>Set</Name>
@@ -32,19 +32,25 @@
         <Field>
           <Group>HW Agreement</Group>
           <Field>Sales or Spend</Field>
-          <Value>No</Value>
+          <Value>Sales</Value>
           <SetNumber>0</SetNumber>
         </Field>
         <Field>
           <Group>HW Agreement</Group>
           <Field>Contract Negotiator</Field>
-          <Value>Suvig Boyed</Value>
+          <Value>Mai Ahmed</Value>
           <SetNumber>0</SetNumber>
         </Field>
         <Field>
           <Group>HW Agreement</Group>
           <Field>Contract ID</Field>
-          <Value>WF-000224</Value>
+          <Value>HW-000103</Value>
+          <SetNumber>0</SetNumber>
+        </Field>
+        <Field>
+          <Group>HW Agreement</Group>
+          <Field>Date Received</Field>
+          <Value>05/06/2026</Value>
           <SetNumber>0</SetNumber>
         </Field>
         <Name>Set</Name>

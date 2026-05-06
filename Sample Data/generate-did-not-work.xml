@@ -1,0 +1,58 @@
+<UpdateMetadata UpdateType="Patch">
+    <MetadataGroups>
+        <MetadataGroup>
+            <Name>HW WF Folder</Name>
+            <Set>
+                <Field>
+                    <Group>HW WF Folder</Group>
+                    <Field>Workflow ID</Field>
+                    <Value>WF-000273</Value>
+                    <SetNumber>0</SetNumber>
+                </Field>
+                <Field>
+                    <Group>HW WF Folder</Group>
+                    <Field>Contract Negotiator Email</Field>
+                    <Value>Suvig.Boyed@docusign.com</Value>
+                    <SetNumber>0</SetNumber>
+                </Field>
+                <SetNumber>0</SetNumber>
+            </Set>
+        </MetadataGroup>
+        <MetadataGroup>
+            <Name>HW Agreement</Name>
+            <Set>
+                <Field>
+                    <Group>HW Agreement</Group>
+                    <Field>Brand</Field>
+                    <Value>Walmart</Value>
+                    <SetNumber>0</SetNumber>
+                </Field>
+                <Field>
+                    <Group>HW Agreement</Group>
+                    <Field>Sales or Spend</Field>
+                    <Value>Sales</Value>
+                    <SetNumber>0</SetNumber>
+                </Field>
+                <Field>
+                    <Group>HW Agreement</Group>
+                    <Field>Contract Negotiator</Field>
+                    <Value>Suvig Boyed</Value>
+                    <SetNumber>0</SetNumber>
+                </Field>
+                <Field>
+                    <Group>HW Agreement</Group>
+                    <Field>Contract ID</Field>
+                    <Value>HW-000107</Value>
+                    <SetNumber>0</SetNumber>
+                </Field>
+                <Field>
+                    <Group>HW Agreement</Group>
+                    <Field>Date Received</Field>
+                    <Value>05/06/2026</Value>
+                    <SetNumber>0</SetNumber>
+                </Field>
+                <SetNumber>0</SetNumber>
+            </Set>
+        </MetadataGroup>
+    </MetadataGroups>
+</UpdateMetadata>
