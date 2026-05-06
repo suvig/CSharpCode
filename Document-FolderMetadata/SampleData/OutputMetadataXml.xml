@@ -17,7 +17,6 @@
           <SetNumber>0</SetNumber>
         </Field>
         <Name>Set</Name>
-        <SetNumber>0</SetNumber>
       </Set>
     </MetadataGroup>
     <MetadataGroup>
@@ -48,7 +47,6 @@
           <SetNumber>0</SetNumber>
         </Field>
         <Name>Set</Name>
-        <SetNumber>0</SetNumber>
       </Set>
     </MetadataGroup>
   </MetadataGroups>
