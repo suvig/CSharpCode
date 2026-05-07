@@ -197,21 +197,17 @@ foreach (System.Xml.XmlNode row in manifest.SelectNodes("//Row"))
 
         // 2. Find or create Set within that group
         // Note: Query includes SetNumber to ensure we create new sets for incremented numbers
-        string setQuery = isRepeatingSet ? $"Set[SetNumber='{setNum}' and Name='{setName}']" : $"Set[SetNumber='{setNum}']";
+        bool isNonRepeatingSet = !isRepeatingSet && setNum == 0;
+        string setQuery = isRepeatingSet
+            ? $"Set[SetNumber='{setNum}' and Name='{setName}']"
+            : isNonRepeatingSet
+                ? "Set[Name='Set' or SetNumber='0']"
+                : $"Set[SetNumber='{setNum}']";
         System.Xml.XmlNode setNode = groupNode.SelectSingleNode(setQuery);
         
         if (setNode == null)
         {
             setNode = dataToWrite.CreateElement("Set");
-            if (isRepeatingSet)
-            {
-                System.Xml.XmlElement setNameElement = dataToWrite.CreateElement("Name");
-                setNameElement.InnerText = setName;
-                setNode.AppendChild(setNameElement);
-            }
-            System.Xml.XmlElement setNumberElement = dataToWrite.CreateElement("SetNumber");
-            setNumberElement.InnerText = setNum.ToString();
-            setNode.AppendChild(setNumberElement);
             groupNode.AppendChild(setNode);
         }
 
@@ -229,13 +225,13 @@ foreach (System.Xml.XmlNode row in manifest.SelectNodes("//Row"))
         {
             System.Xml.XmlElement fieldContainer = dataToWrite.CreateElement("Field");
 
-            System.Xml.XmlElement fName = dataToWrite.CreateElement("Field");
-            fName.InnerText = targetField;
-            fieldContainer.AppendChild(fName);
-
             System.Xml.XmlElement fGroup = dataToWrite.CreateElement("Group");
             fGroup.InnerText = targetGroup;
             fieldContainer.AppendChild(fGroup);
+
+            System.Xml.XmlElement fName = dataToWrite.CreateElement("Field");
+            fName.InnerText = targetField;
+            fieldContainer.AppendChild(fName);
 
             System.Xml.XmlElement fVal = dataToWrite.CreateElement("Value");
             fVal.InnerText = finalVal;
@@ -248,11 +244,48 @@ foreach (System.Xml.XmlNode row in manifest.SelectNodes("//Row"))
                 fieldContainer.AppendChild(fSetName);
             }
 
-            System.Xml.XmlElement fSetNum = dataToWrite.CreateElement("SetNumber");
-            fSetNum.InnerText = setNum.ToString();
-            fieldContainer.AppendChild(fSetNum);
+            if (!isNonRepeatingSet)
+            {
+                System.Xml.XmlElement fSetNum = dataToWrite.CreateElement("SetNumber");
+                fSetNum.InnerText = setNum.ToString();
+                fieldContainer.AppendChild(fSetNum);
+            }
 
             setNode.AppendChild(fieldContainer);
+        }
+
+        string resolvedSetName = isRepeatingSet ? setName : "Set";
+        System.Xml.XmlElement setNameNode = setNode.SelectSingleNode("Name") as System.Xml.XmlElement;
+        if (setNameNode == null)
+        {
+            setNameNode = dataToWrite.CreateElement("Name");
+        }
+        else
+        {
+            setNode.RemoveChild(setNameNode);
+        }
+        setNameNode.InnerText = resolvedSetName;
+        setNode.AppendChild(setNameNode);
+
+        System.Xml.XmlElement setNumberNode = setNode.SelectSingleNode("SetNumber") as System.Xml.XmlElement;
+        if (isNonRepeatingSet)
+        {
+            if (setNumberNode != null)
+            {
+                setNode.RemoveChild(setNumberNode);
+            }
+        }
+        else if (setNumberNode == null)
+        {
+            setNumberNode = dataToWrite.CreateElement("SetNumber");
+            setNumberNode.InnerText = setNum.ToString();
+            setNode.AppendChild(setNumberNode);
+        }
+        else
+        {
+            setNode.RemoveChild(setNumberNode);
+            setNumberNode.InnerText = setNum.ToString();
+            setNode.AppendChild(setNumberNode);
         }
     }
 }
