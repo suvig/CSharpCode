@@ -1232,9 +1232,10 @@ class Program
         dataToWrite.Save(outputPath);
         Console.WriteLine($"\nXML saved to: {outputPath}");
         
-
-                // --- CLM USE (Uncomment for CLM USE) ---
-                //return dataToWrite.OuterXml;
+        // --- CLM USE (Uncomment for CLM USE) ---
+        // Updated May 6 as UpdateMetadataActivity cannot take DebugLog
+        // writeRoot.RemoveChild(errorLogNode);
+        //return dataToWrite.OuterXml;
         
         // =========================================================
     }
