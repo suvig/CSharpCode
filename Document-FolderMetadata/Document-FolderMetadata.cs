@@ -1,6 +1,6 @@
 // ---------------------------------------------------------
 // Created by:            Kyle Bouquet
-// Last Modified:         2026-02-03
+// Last Modified:         2026-05-07
 // Description:           This program processes a manifest XML to extract metadata from source XML or string variables,
 //                        formats the data according to specified rules, and constructs an output XML document for metadata updates.
 //                        It supports both single data points and sets of data points, with detailed debug logging throughout the process.
@@ -12,6 +12,10 @@
 //                        for testing in a local environment with simulated data files as well as in CLM by commenting and uncommenting the appropriate lines.
 //                        Additionally, the logging is extremely heavy for debug purposes on initial build. Once stable, CONSIDER REDUCING the logging to only key events or errors
 //                        to maintain an output within the 1MB limit for expression output in CLM, or to disable entirely by setting 'disableDebugLogging' to TRUE at the start of code.
+// Recent Changes:        2026-05-06: Added manifest Condition support to evaluate XPath boolean expressions against xWFData before processing rows.
+//                        2026-05-06: Updated CreateFieldSet output for Engineering guidance/product bug workaround: non-repeating fields use set-level Name and omit SetNumber=0.
+//                        2026-05-07: Added IsRepeatable manifest support. Blank or missing IsRepeatable defaults to FALSE; TRUE writes all matching source nodes.
+//                        2026-05-07: Applied IsRepeatable to both SetName rows and non-set rows, and cleaned duplicate SetNumber debug logging.
 // Manifest Requirements: The manifest XML must contain rows with specific fields (names can be modified when loading the manifest if your structure or manifest is different):
 //                        NameOfSourceVariable (string, required): the name of the variable in the workflow from which data should be sourced
 //                        XmlSourcePath (string, required for XML sources, should NOT be filled for string sources): the xpath (simple or with predicate) where data is expected in the XML source
@@ -19,6 +23,7 @@
 //                        TargetGroup (string, required, case and space sensitive): The name of the target group to create
 //                        TargetField (string, required, case and space sensitive): The name of the target field to create
 //                        SetName (string, required for fields that are part of the same set within a group): Used to identify manifest rows that belong together for repeating and non-repeating sets
+//                        IsRepeatable (bool, optional): default FALSE if missing or blank. When TRUE, all matching source nodes are written; when FALSE, only the first match is written. Applies to SetName and non-set rows.
 //                        IgnoreNull (bool, optional): default FALSE if not specified. When TRUE, will skip attempting to write rows where source is NULL. Note: if null value is in a group where other fields are written, field may still appear
 //                        Condition (string, optional): XPath boolean expression evaluated against xWFData. Row is skipped unless the expression returns TRUE.
 //                        Transformations (string, pipe delimited sets, colon delimited transformations): takes a found value and translates it to its corresponding transformed value. Format as 'Value1:Value2|ValueA:ValueB' where the comparison value is left of colon, transformed result is right of colon. Possibilities separated by pipe.
@@ -73,6 +78,8 @@ class Program
         string colDefaultValue = "DefaultValue";
         string colTargetGroup = "TargetGroup";
         string colTargetField = "TargetField";
+        // May 7, 2026: Added IsRepeatable so manifest rows explicitly control whether all matching source nodes are written.
+        string colIsRepeatable = "IsRepeatable";
         string colIsDate = "IsDate";
         string colIsNumber = "IsNumber";
         string colIsDecimal = "IsDecimal";
@@ -379,13 +386,16 @@ class Program
                                         string currentSourcePath = groupRow.SelectSingleNode(colXmlSourcePath).InnerText;
                                         string sourceDataQuery = "//" + currentSourcePath;
                                         XmlNodeList sourceNodes = source.SelectNodes(sourceDataQuery);
+                                        // May 7, 2026: Honor IsRepeatable inside SetName groups; blank/missing values default to FALSE.
+                                        bool isSetRowRepeatable = groupRow.SelectSingleNode(colIsRepeatable)?.InnerText?.ToUpper() == "TRUE";
+                                        int sourceNodeCountToProcess = isSetRowRepeatable ? sourceNodes.Count : Math.Min(sourceNodes.Count, 1);
 
                                         // We reset this counter for each source fieldName in the set (not for each found instance in the source data) otherwise later data points 
                                         // in the set would be misaligned. Values not found in the source data will get an empty node with the SetNumber
                                         int createdSetNumber = 1;
-                                        
+
                                         // Create new log entry for this row in the set and indicate how many were found
-                                        logMessage = "Found " + sourceNodes.Count.ToString() + " Source Items for this Row.";
+                                        logMessage = "Found " + sourceNodes.Count.ToString() + " Source Items for this Row. Processing " + sourceNodeCountToProcess.ToString() + " based on IsRepeatable=" + (isSetRowRepeatable ? "TRUE" : "FALSE") + ".";
                                         WriteDebugLog(groupRow, logMessage, null, false, 1);
 
                                          // Call the helper function to validate target names
@@ -405,7 +415,8 @@ class Program
                                         }
 
                                         // Write each found node for this SourcePath to the new output variable 'dataToWrite'
-                                        foreach (XmlNode sourceNode in sourceNodes){
+                                        for (int sourceNodeIndex = 0; sourceNodeIndex < sourceNodeCountToProcess; sourceNodeIndex++){
+                                                XmlNode sourceNode = sourceNodes[sourceNodeIndex];
 
                                                 // Increment found item count
                                                 foundItemCount++;
@@ -434,10 +445,13 @@ class Program
                                                 bool sourceSetNumberExists = !string.IsNullOrEmpty(setNumberAttr);
                                                 string setNumber = !string.IsNullOrEmpty(setNumberAttr) ? setNumberAttr : createdSetNumber.ToString();
                                                 int currentSetNumber = int.Parse(setNumber);
+                                                // May 7, 2026: Avoid duplicate SetNumber debug messages when the first generated number is accepted.
+                                                bool setNumberResolvedMessageAlreadyLogged = false;
                                                 if(!sourceSetNumberExists){  
                                                         // Log SetNumber not found
                                                         logMessage = "----|SetNumber not identified in source. Searching for next available number based on both source and target xml...";
                                                         WriteDebugLog(null, logMessage, null, false, 1);
+                                                        setNumberResolvedMessageAlreadyLogged = true;
 
                                                         // If the set number is already in use with that set name in the SOURCE data, OR there is an element in the newGroupNode that already has this setNumber, increment until we find one that is not in use      
                                                         while ((source.SelectNodes("//*[@SetName='" + currentSetName + "' and @SetNumber='" + currentSetNumber + "']").Count > 0) || (newGroupNode.SelectNodes("//MetadataGroup[Name/text()='" + targetGroup + "']/Set/Field[Field/text()='" + targetField + "' and SetNumber/text()='" + currentSetNumber.ToString() + "']").Count > 0))
@@ -448,6 +462,7 @@ class Program
                                                                 WriteDebugLog(null, logMessage, null, false);
                                                                 logMessage = "----|FOUND AVAILABLE SETNUMBER: " + createdSetNumber.ToString();
                                                                 currentSetNumber = createdSetNumber;
+                                                                setNumberResolvedMessageAlreadyLogged = false;
                                                         }
                                                         if(!createdSetNumbers.Contains(currentSetNumber.ToString())){
                                                                 createdSetNumbers += "|" + currentSetNumber.ToString() + "|";
@@ -457,9 +472,12 @@ class Program
                                                         // Log that we are using the source SetNumber
                                                         logMessage = "----|FOUND SETNUMBER IN SOURCE " + currentSetNumber.ToString();
                                                 }
-      
+
                                                 // Log found available SetNumber
-                                                WriteDebugLog(null, logMessage, null, false, 1);
+                                                if (!setNumberResolvedMessageAlreadyLogged)
+                                                {
+                                                        WriteDebugLog(null, logMessage, null, false, 1);
+                                                }
 
                                                 // Now that we have an available of found set number, we add the data to the group node, but first we have to check if the set has already been established in this group
                                                 CreateFieldSet(newGroupNode, currentSetNumber, targetGroup, targetField, sourceNodeData, currentSetName);                                    
@@ -531,49 +549,92 @@ class Program
                                 continue; 
                         }
 
-                        XmlNode sourceNode = source.SelectSingleNode(sourceDataQuery);
+                        // May 7, 2026: Non-set rows can now opt in to writing every matching source node through IsRepeatable.
+                        bool isRepeatable = currentRowNode.SelectSingleNode(colIsRepeatable)?.InnerText?.ToUpper() == "TRUE";
 
-                        // Log found data point
-                        logMessage = "Found source data: " + (sourceNode != null ? sourceNode.InnerText : "NULL");
-                        WriteDebugLog(null, logMessage, null, false, 1);
+                        if (isRepeatable)
+                        {
+                                XmlNodeList repeatSourceNodes = source.SelectNodes(sourceDataQuery);
+                                logMessage = "Found " + repeatSourceNodes.Count.ToString() + " source data item(s) for repeatable row.";
+                                WriteDebugLog(null, logMessage, null, false, 1);
 
-                        if (sourceNode != null){
-                                // ---------------------------------------------------------
-                                // * Get the data and check if data needs special handling (date, number, or transformation), and then write it to the new node
-                                // * We do this first because if there is no data, we may need to skip writing the node entirely based on manifest settings
-                                // ---------------------------------------------------------
-                                // Pass data to Helper Function to format properly
-                                string sourceNodeData = FormatDataValue(sourceNode.InnerText, currentRowNode);
-                                // Use Helper function to check if we should skip this row based on manifest settings
-                                if (ShouldSkipRow(currentRowNode, sourceNodeData))
+                                if (repeatSourceNodes.Count > 0)
                                 {
-                                        // Log that we are skipping this row based on manifest settings
-                                        logMessage = "Skipping row based on manifest settings.";
-                                        WriteDebugLog(null, logMessage, "Skipped", false, 2);
-                                        // Track completion of processing for this row
-                                        string skippedRowIndex = GetRowIndexNumber(currentRowNode);
-                                        if (!processedIndexes.Contains(skippedRowIndex)){        
-                                                processedIndexes += skippedRowIndex + "|"; 
+                                        XmlElement newGroupNode = GetOrCreateGroupNode(outerGroupNode, targetGroup);
+                                        int createdSetNumber = 1;
+
+                                        foreach (XmlNode repeatSourceNode in repeatSourceNodes)
+                                        {
+                                                string sourceNodeData = FormatDataValue(repeatSourceNode.InnerText, currentRowNode);
+                                                if (ShouldSkipRow(currentRowNode, sourceNodeData))
+                                                {
+                                                        logMessage = "Skipping repeatable row item based on manifest settings.";
+                                                        WriteDebugLog(null, logMessage, "Skipped", false, 2);
+                                                        continue;
+                                                }
+
+                                                string setNumberAttr = repeatSourceNode.Attributes?["SetNumber"]?.Value;
+                                                int currentSetNumber;
+                                                if (!string.IsNullOrEmpty(setNumberAttr) && int.TryParse(setNumberAttr, out currentSetNumber))
+                                                {
+                                                        // Use source-provided SetNumber when available.
+                                                }
+                                                else
+                                                {
+                                                        currentSetNumber = createdSetNumber;
+                                                        createdSetNumber++;
+                                                }
+
+                                                CreateFieldSet(newGroupNode, currentSetNumber, targetGroup, targetField, sourceNodeData, null);
+                                        }
+                                }
+                        }
+                        else
+                        {
+                                XmlNode sourceNode = source.SelectSingleNode(sourceDataQuery);
+
+                                // Log found data point
+                                logMessage = "Found source data: " + (sourceNode != null ? sourceNode.InnerText : "NULL");
+                                WriteDebugLog(null, logMessage, null, false, 1);
+
+                                if (sourceNode != null){
+                                        // ---------------------------------------------------------
+                                        // * Get the data and check if data needs special handling (date, number, or transformation), and then write it to the new node
+                                        // * We do this first because if there is no data, we may need to skip writing the node entirely based on manifest settings
+                                        // ---------------------------------------------------------
+                                        // Pass data to Helper Function to format properly
+                                        string sourceNodeData = FormatDataValue(sourceNode.InnerText, currentRowNode);
+                                        // Use Helper function to check if we should skip this row based on manifest settings
+                                        if (ShouldSkipRow(currentRowNode, sourceNodeData))
+                                        {
+                                                // Log that we are skipping this row based on manifest settings
+                                                logMessage = "Skipping row based on manifest settings.";
+                                                WriteDebugLog(null, logMessage, "Skipped", false, 2);
+                                                // Track completion of processing for this row
+                                                string skippedRowIndex = GetRowIndexNumber(currentRowNode);
+                                                if (!processedIndexes.Contains(skippedRowIndex)){
+                                                        processedIndexes += skippedRowIndex + "|";
+                                                }
+
+                                                // Skip to the next iteration of the loop
+                                                continue;
                                         }
 
-                                        // Skip to the next iteration of the loop
-                                        continue;
-                                }
-                                
-                                // Since we passed above checks, first Determine if group already exists, if not create it
-                                XmlElement newGroupNode = GetOrCreateGroupNode(outerGroupNode, targetGroup);
+                                        // Since we passed above checks, first Determine if group already exists, if not create it
+                                        XmlElement newGroupNode = GetOrCreateGroupNode(outerGroupNode, targetGroup);
 
-                                 // Since we passed above checks, first Determine if FIELD SET already exists, if not create it
-                                XmlElement newFieldNode = newGroupNode.SelectSingleNode("Set/Field[Field/text()='" + targetField + "']") as XmlElement;
-                                if (newFieldNode == null)
-                                {
-                                        CreateFieldSet(newGroupNode, 0, targetGroup, targetField, sourceNodeData, null);
-                                }
-                                else{
-                                        newFieldNode.SelectSingleNode("Value").InnerText = sourceNodeData;
-                                        // Log that the field node already exists and that it was overwritten with new data
-                                        logMessage = "----|Field Node " + targetField + " already exists in target XML and was overwritten with new data";
-                                        WriteDebugLog(null, logMessage, null, false, 3);
+                                         // Since we passed above checks, first Determine if FIELD SET already exists, if not create it
+                                        XmlElement newFieldNode = newGroupNode.SelectSingleNode("Set/Field[Field/text()='" + targetField + "']") as XmlElement;
+                                        if (newFieldNode == null)
+                                        {
+                                                CreateFieldSet(newGroupNode, 0, targetGroup, targetField, sourceNodeData, null);
+                                        }
+                                        else{
+                                                newFieldNode.SelectSingleNode("Value").InnerText = sourceNodeData;
+                                                // Log that the field node already exists and that it was overwritten with new data
+                                                logMessage = "----|Field Node " + targetField + " already exists in target XML and was overwritten with new data";
+                                                WriteDebugLog(null, logMessage, null, false, 3);
+                                        }
                                 }
                         }
                         // Track completion of processing for this row
