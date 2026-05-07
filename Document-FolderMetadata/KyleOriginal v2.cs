@@ -838,12 +838,21 @@
         //----------------------------------------------------------
         // Helper Function to create the field set nodes
         //----------------------------------------------------------
-        //Create the <Set> node if it doesn't already exist, and add the set name and set number
+        // Create the <Set> node if it doesn't already exist, add the field,
+        // then place set-level metadata after the field nodes.
         void CreateFieldSet(XmlElement newGroupNode, int currentSetNumber,  string targetGroup, string targetField, string sourceNodeData, string currentSetName)
         {
                 XmlElement newSetNode = null;
-                if (currentSetName != null){
+                bool hasCurrentSetName = !string.IsNullOrEmpty(currentSetName);
+                bool isNonRepeatingSet = !hasCurrentSetName && currentSetNumber == 0;
+
+                if (hasCurrentSetName){
                         newSetNode = newGroupNode.SelectSingleNode("Set[Name/text()='" + currentSetName + "' and SetNumber/text()='" + currentSetNumber.ToString() + "']") as XmlElement;
+                }
+                else if (isNonRepeatingSet){
+                        // Product bug workaround: non-repeating fields need a set-level Name,
+                        // but should not emit SetNumber=0.
+                        newSetNode = newGroupNode.SelectSingleNode("Set[Name/text()='Set' or SetNumber/text()='0']") as XmlElement;
                 }
                 else{
                         newSetNode = newGroupNode.SelectSingleNode("Set[SetNumber/text()='" + currentSetNumber.ToString() + "']") as XmlElement;
@@ -852,24 +861,8 @@
                 {
                         newSetNode = newGroupNode.OwnerDocument.CreateElement("Set");
 
-                        // Check to see if there is a SetName before creating the node (non repeating fields will not have one)
-                        if (!string.IsNullOrEmpty(currentSetName)){
-                                XmlElement newSetNameNode = newSetNode.OwnerDocument.CreateElement("Name");
-                                newSetNameNode.InnerText = currentSetName;
-                                newSetNode.AppendChild(newSetNameNode);
-
-                                // Log that we created the set node
-                                logMessage = "----|CREATED new SetName Node for SetName: " + currentSetName;
-                                WriteDebugLog(null, logMessage, null, false, 1);
-                        }
-
-                        //Create the set number node (which will be "0" if non repeating)
-                        XmlElement newSetNumberNode = newSetNode.OwnerDocument.CreateElement("SetNumber");
-                        newSetNumberNode.InnerText = currentSetNumber.ToString();
-                        newSetNode.AppendChild(newSetNumberNode);
-
                         // Log that we created the set node
-                        logMessage = "----|CREATED new SetNumber node for Set Number: " + currentSetNumber.ToString();
+                        logMessage = "----|CREATED new Set node for SetName: " + currentSetName + " and SetNumber: " + currentSetNumber.ToString();
                         WriteDebugLog(null, logMessage, null, false, 1);
                 }
                 else{
@@ -886,12 +879,12 @@
 
                 // Then create the <Field> to append to the set group by adding the Group, Field Name, Value, and Set Number information
                 XmlElement newFieldNode = newSetNode.OwnerDocument.CreateElement("Field");
-                XmlElement newFieldNameNode = newFieldNode.OwnerDocument.CreateElement("Field");
-                newFieldNameNode.InnerText = targetField;
-                newFieldNode.AppendChild(newFieldNameNode);
                 XmlElement GroupNameNode = newFieldNode.OwnerDocument.CreateElement("Group");
                 GroupNameNode.InnerText = targetGroup;
                 newFieldNode.AppendChild(GroupNameNode);
+                XmlElement newFieldNameNode = newFieldNode.OwnerDocument.CreateElement("Field");
+                newFieldNameNode.InnerText = targetField;
+                newFieldNode.AppendChild(newFieldNameNode);
                 XmlElement newFieldValueNode = newFieldNode.OwnerDocument.CreateElement("Value");
                 newFieldValueNode.InnerText = sourceNodeData;
                 newFieldNode.AppendChild(newFieldValueNode);
@@ -900,14 +893,45 @@
                         newSetNameFieldNode.InnerText = currentSetName;
                         newFieldNode.AppendChild(newSetNameFieldNode);
                 }
-                XmlElement newSetNumberFieldNode = newFieldNode.OwnerDocument.CreateElement("SetNumber");
-                newSetNumberFieldNode.InnerText = currentSetNumber.ToString();
-                newFieldNode.AppendChild(newSetNumberFieldNode);
-                newSetNode.AppendChild(newFieldNode);                                             
-                newGroupNode.AppendChild(newSetNode);
+
+                if (!isNonRepeatingSet){
+                        XmlElement newSetNumberFieldNode = newFieldNode.OwnerDocument.CreateElement("SetNumber");
+                        newSetNumberFieldNode.InnerText = currentSetNumber.ToString();
+                        newFieldNode.AppendChild(newSetNumberFieldNode);
+                }
+
+                newSetNode.AppendChild(newFieldNode);
+
+                string setName = hasCurrentSetName ? currentSetName : "Set";
+                XmlElement setNameElement = newSetNode.SelectSingleNode("Name") as XmlElement;
+                if (setNameElement == null){
+                        setNameElement = newSetNode.OwnerDocument.CreateElement("Name");
+                }
+                else{
+                        newSetNode.RemoveChild(setNameElement);
+                }
+                setNameElement.InnerText = setName;
+                newSetNode.AppendChild(setNameElement);
+
+                XmlElement setNumberElement = newSetNode.SelectSingleNode("SetNumber") as XmlElement;
+                if (isNonRepeatingSet){
+                        if (setNumberElement != null){
+                                newSetNode.RemoveChild(setNumberElement);
+                        }
+                }
+                else if (setNumberElement == null){
+                        setNumberElement = newSetNode.OwnerDocument.CreateElement("SetNumber");
+                        setNumberElement.InnerText = currentSetNumber.ToString();
+                        newSetNode.AppendChild(setNumberElement);
+                }
+                else{
+                        newSetNode.RemoveChild(setNumberElement);
+                        setNumberElement.InnerText = currentSetNumber.ToString();
+                        newSetNode.AppendChild(setNumberElement);
+                }
 
                 // Log that we created the field node
-                logMessage = "----|Created new Field Set Node for: " + targetField;
+                logMessage = "----|Created/updated Field Set Node for: " + targetField;
                 WriteDebugLog(null, logMessage, null, false, 1);
         }
          
@@ -1014,4 +1038,7 @@
         
 
         // --- CLM USE (Uncomment for CLM USE) ---
+        // Updated May 6 as UpdateMetadataActivity cannot take DebugLog
+        writeRoot.RemoveChild(errorLogNode);
+
         return dataToWrite.OuterXml;
